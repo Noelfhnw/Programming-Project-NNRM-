@@ -22,4 +22,4 @@ It can show monthly totals, spending per category, remaining money, and whether 
    Add tasks with priority and deadline.
    Mark tasks as completed and filter by status or priority.
 
-4. ---
+4. --- 
