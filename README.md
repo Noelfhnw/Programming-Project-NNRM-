@@ -37,7 +37,7 @@ People who aknowledge that they have to improve their sleep can use our programm
 
 | Role | Description |
 |------|-------------|
-| **student** | wants to track their sleep and wants to know the wekkly/monthly average and how to improve their sleep.
+| **🧑‍🎓student** | wants to track their sleep and wants to know the wekkly/monthly average and how to improve their sleep.
 
 
 ### 📖 User Stories
