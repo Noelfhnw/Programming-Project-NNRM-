@@ -26,14 +26,12 @@ This project is intended to:
 ## 📝 Analysis
 
 **Problem**
-> 🚧 Describe the real-world problem your application solves. (Not HOW, but WHAT)
 
-💡 
+People tend to sleep less than recommended and they dont know how to improve their sleep.
 
 **Scenario**
-> 🚧 Describe when and how a user will use your application
 
-💡 Example: PizzaRP solves the part of the problem where orders and totals are created by letting a user select items from a menu and automatically generating a correct invoice.
+People who aknowledge that they have to improve their sleep can use our programm to get insight to their sleep behavior and recieve a plan on how to fix their sleeping habits.
 
 ### 👤 User Roles
 
@@ -41,9 +39,8 @@ This project is intended to:
 
 | Role | Description |
 |------|-------------|
-| **Customer** | Orders pizzas and wants to know what they have ordered and how much they need to pay. |
-| **Staff member** | Takes orders at the counter and enters them into the console application. |
-| **Owner** | Runs the pizzeria, maintains the menu, and keeps records of all sales. |
+| **user** | wants to track their sleep and wants to knwo the wekkly/monthly average and how to improve their sleep.
+
 
 ### 📖 User Stories
 
