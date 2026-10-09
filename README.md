@@ -35,11 +35,9 @@ People who aknowledge that they have to improve their sleep can use our programm
 
 ### 👤 User Roles
 
-> 🚧 Identify *who* uses your application before writing stories. Writing every story for a generic "user" hides the fact that different people need different things (M. Cohn, *User Stories Applied*, ch. 3 "User Role Modeling"). Name your roles and use them consistently in your stories.
-
 | Role | Description |
 |------|-------------|
-| **user** | wants to track their sleep and wants to knwo the wekkly/monthly average and how to improve their sleep.
+| **student** | wants to track their sleep and wants to knwo the wekkly/monthly average and how to improve their sleep.
 
 
 ### 📖 User Stories
