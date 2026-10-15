@@ -55,150 +55,192 @@ People who aknowledge that they have to improve their sleep can use our programm
 >
 > 💡 The stories below are examples for PizzaRP. Replace them with the stories of your own project.
 
-All prices are in Swiss francs (CHF). The examples use the following menu from `menu.txt`:
 
-| No. | Pizza | Size | Unit price |
-|-----|-------|------|-----------:|
-| 1 | Margherita | Medium | CHF 12.50 |
-| 2 | Salami | Large | CHF 15.00 |
-| 3 | Funghi | Small | CHF 9.00 |
-| 4 | Hawaii | Medium | CHF 14.00 |
-| 5 | Diavola | Large | CHF 17.50 |
+# 😴 Sleep Tracker: User Stories
+
+A simple terminal program in Python (Programming Foundations, BSc Business Information Technology, FHNW). The user enters data in the console and the program saves it to a CSV file.
+
+## Conventions
+
+- Data is stored in `sleep_log.csv` (one line per night): `date;bedtime;wake_time;minutes_to_fall_asleep;quality;caffeine;alcohol`.
+- Times use the format `HH:MM` (e.g., `23:30`). Durations are displayed as `<h>h <mm>min` (e.g., `7h 30min`).
+- A night can cross midnight: bedtime `23:30` and wake-up `07:00` give 7h 30min.
+- "Week" means the last 7 logged nights, "month" means the last 30 logged nights.
+- The sleep target is fixed at 8h 00min.
+
+## Assignment of user stories
+
+| Team member | User stories |
+|---|---|
+| Friend | US-01, US-02, US-03 |
+| Member A | US-04, US-05, US-06 |
+| Member B | US-07, US-08, US-09 |
+| Member C | US-10, US-11, US-12 |
 
 ---
 
-#### US-01: Show the pizza menu
+## US-01: Track Time to Fall Asleep
+**Assigned to:** Friend
 
-**As a** customer, **I want** to see a numbered list of all available pizzas with their size and price, **so that** I can decide what to order.
+As a Worker I want to enter how many minutes it took me to fall asleep, so that I can track my sleep and understand how quickly I fall asleep.
+
+**Acceptance Criteria:**
+
+1. The worker can enter the time it took to fall asleep in minutes.
+2. Maybe : The application displays an error message if the user enters an invalid value, such as text or a negative number ????
+3. The application saves the entered time.
+4. The user can view previously recorded times.
+5. Maybe: The application calculates the average time it takes to fall asleep over the last 7 days --- ???
+
+## US-02: Rate Morning Sleep Quality
+**Assigned to:** Friend
+
+As a Student I want to rate how rested I feel each morning on a scale from 1 to 5, so that I can track my sleep quality, not just my sleep duration.
+
+**Acceptance Criteria:**
+
+1. The student can rate how rested they feel each morning using a scale from `1` to `5`
+2. The application accepts only whole numbers between `1` and `5`.
+3. The application displays an error message if the user enters an invalid rating.
+4. The rating scale is clearly explained:
+   * `1` = Very tired
+   * `2` = Tired
+   * `3` = Neutral
+   * `4` = Rested
+   * `5` = Very rested
+
+## US-03: Track Caffeine and Alcohol Consumption
+**Assigned to:** Friend
+
+As a Fitness Enthusiast, I want to record whether I consumed caffeine or alcohol during the day, so that I can understand how these habits may affect my sleep quality.
+
+**Acceptance Criteria:**
+
+1. The Fitness Enthusiast can indicate whether they consumed caffeine, alcohol (`Yes/No`).
+2. Maybe: The application compares caffeine and alcohol consumption with sleep duration, sleep quality, and mood ratings, and provides personalized recommendations to help improve  sleep and overall well-being ---???
+
+---
+
+## US-04: Log bedtime and wake-up time
+**Assigned to:** Member A
+
+As a user, I want to log my bedtime and wake-up time, so that the program knows how long I slept.
 
 **Acceptance criteria**
-- The menu is displayed when the staff member selects option `1` ("Show menu") in the main menu.
-- The menu is also displayed automatically before a new order is started (option `2`).
-- Each pizza is shown on its own line in the format `<No>. <Name> (<Size>) - CHF <Price>`, e.g., `1. Margherita (Medium) - CHF 12.50`.
-- The numbering starts at `1` and follows the order of the lines in `menu.txt`.
-- All prices are displayed with exactly two decimal places.
-- *Given* `menu.txt` contains the five pizzas listed above, *when* the menu is displayed, *then* exactly five numbered lines are shown, from `1. Margherita (Medium) - CHF 12.50` to `5. Diavola (Large) - CHF 17.50`.
+- [ ] The program asks for bedtime and wake-up time. The date is today's date.
+- [ ] Given the input `25:00` or `7pm` as time, then `⚠️ Invalid time. Use HH:MM.` is displayed and the question is asked again.
+- [ ] Given bedtime `23:30` and wake-up `07:00`, then the night is saved with a duration of 7h 30min.
+- [ ] After saving, `✅ Night saved.` is displayed. If `sleep_log.csv` does not exist, it is created automatically.
+- [ ] In none of the invalid cases does the program crash (no Python traceback).
 
----
+## US-05: See how long I slept last night
+**Assigned to:** Member A
 
-#### US-02: Maintain the menu in a file
-
-**As an** owner, **I want** the menu to be read from the text file `menu.txt`, **so that** I can change pizzas and prices without changing the program code.
+As a user, I want to see how long I slept last night, so that I get immediate feedback.
 
 **Acceptance criteria**
-- The application reads `menu.txt` at startup.
-- Each line has the format `Name;Size;Price` (three fields separated by `;`), e.g., `Margherita;Medium;12.50`.
-- *Given* the owner adds the line `Quattro Formaggi;Large;18.00` to `menu.txt`, *when* the application is restarted and the menu is displayed, *then* `6. Quattro Formaggi (Large) - CHF 18.00` appears as the last line of the menu.
-- *Given* `menu.txt` contains the line `Calzone;Large;abc`, *when* the menu is loaded, *then* the warning `⚠️ Skipping invalid line: Calzone;Large;abc` is displayed, the line is not added to the menu, and all valid lines are still loaded.
-- *Given* a line in `menu.txt` does not contain exactly three fields (e.g., `Marinara;Small`), *when* the menu is loaded, *then* that line is not added to the menu and the application does not crash.
-- *Given* `menu.txt` does not exist, *when* the application starts, *then* a new `menu.txt` is created containing the three starter pizzas Margherita (Medium, 12.50), Salami (Large, 15.00), and Funghi (Small, 9.00), and these three pizzas are displayed in the menu.
+- [ ] After a night is logged, the program displays `You slept 7h 30min.`
+- [ ] Given bedtime `22:45` and wake-up `06:15`, then `You slept 7h 30min.` is displayed.
+- [ ] Given bedtime `00:15` and wake-up `06:15`, then `You slept 6h 00min.` is displayed.
+- [ ] The message includes the difference to the 8h 00min target, e.g., `30min below your target`.
+- [ ] Given `sleep_log.csv` has no entries, then `⚠️ No data yet. Log a night first.` is displayed.
 
----
+## US-06: See my weekly average sleep time
+**Assigned to:** Member A
 
-#### US-03: Order pizzas with a quantity
-
-**As a** customer, **I want** to order several pieces of the same pizza and see the total price for each item, **so that** I know how much each item of my order costs.
+As a user, I want to see my weekly average sleep time, so that I can spot trends.
 
 **Acceptance criteria**
-- The staff member selects a pizza by entering its menu number.
-- After selecting a pizza, the staff member enters a quantity (a whole number).
-- Each selected pizza has a unit price taken from the menu.
-- The system multiplies the unit price by the quantity to calculate the item total.
-- The item total is displayed with two decimal places, e.g., `2x Margherita (Medium) - CHF 25.00`.
-- *Given* a pizza with a unit price of CHF 12.50 and a quantity of 2, *when* the item total is calculated, *then* the result is CHF 25.00.
-- *Given* a pizza with a unit price of CHF 17.50 and a quantity of 3, *when* the item total is calculated, *then* the result is CHF 52.50.
-- *Given* a quantity of 0 or smaller (e.g., `0` or `-2`), *when* the item total is calculated, *then* the result is always CHF 0.00 (the calculation never returns a negative amount).
-- Entering `done` instead of a pizza number finishes the order.
+- [ ] The program averages the last 7 logged nights and displays `Weekly average: 7h 00min (3 nights)`.
+- [ ] Given three nights of 7h 00min, 8h 00min, and 6h 00min, then `Weekly average: 7h 00min (3 nights)` is displayed.
+- [ ] Given more than 7 entries, only the 7 most recent are used.
+- [ ] Given only one entry, then its duration is shown with `(1 night)`.
+- [ ] Given no entries, then `⚠️ No data yet. Log a night first.` is displayed.
+- [ ] The average is rounded to the full minute.
 
----
+## US-07: See my longest and shortest night
+**Assigned to:** Member B
 
-#### US-04: Reject invalid input
-
-**As a** staff member, **I want** the application to reject invalid input with a clear message and let me try again, **so that** a typing mistake does not crash the program or create a wrong order.
+As a user, I want to see my longest and shortest night of the week or month, so that I can identify outliers.
 
 **Acceptance criteria**
-- *Given* the menu has five pizzas, *when* the staff member enters `0`, `6`, `-1`, `abc`, or an empty input as pizza number, *then* the message `⚠️ Invalid choice.` is displayed, nothing is added to the order, and the staff member is asked for a pizza number again.
-- *Given* a valid pizza was selected, *when* the staff member enters `0`, a negative number, a decimal number (e.g., `1.5`), or text (e.g., `two`) as quantity, *then* the message `⚠️ Invalid quantity.` is displayed, the pizza is not added to the order, and the staff member is asked for the quantity again.
-- *Given* the main menu is displayed, *when* the staff member enters anything other than `1`, `2`, or `3`, *then* the message `⚠️ Invalid choice.` is displayed and the main menu is shown again.
-- Input is accepted regardless of surrounding spaces and upper/lower case for the keyword, e.g., ` DONE ` finishes the order just like `done`.
-- In none of the cases above does the program terminate with an error (no Python traceback is shown).
+- [ ] The user enters `week` or `month`. Any other input shows `⚠️ Invalid choice.` and asks again.
+- [ ] The output shows date and duration, e.g., `Longest: 2026-10-12 (9h 10min)` and `Shortest: 2026-10-14 (4h 45min)`.
+- [ ] Given nights of 7h 00min, 9h 10min, and 4h 45min, then the longest is 9h 10min and the shortest is 4h 45min.
+- [ ] Given only one entry, then it is shown as both longest and shortest.
+- [ ] Given no entries, then `⚠️ No data yet. Log a night first.` is displayed.
 
----
+## US-08: Compare my last night to my average bedtime and wake-up time
+**Assigned to:** Member B
 
-#### US-05: See the running subtotal
-
-**As a** customer, **I want** to see the current subtotal after each pizza is added, **so that** I can keep track of my spending while ordering.
-
-**Acceptance criteria**
-- After each successfully added item, the message `Added! Current subtotal: CHF <amount>` is displayed.
-- The subtotal is the sum of all item totals (unit price × quantity) in the current order, before any discount.
-- The subtotal is displayed with two decimal places.
-- *Given* the order already contains 1x Salami (CHF 15.00), *when* 2x Margherita (CHF 12.50 each) are added, *then* the message `Added! Current subtotal: CHF 40.00` is displayed.
-- An invalid input (see US-04) does not change the subtotal.
-
----
-
-#### US-06: Apply discounts automatically
-
-**As an** owner, **I want** the pizzeria's discounts to be applied automatically, **so that** every customer receives the same discounts and staff do not make calculation mistakes.
+As a user, I want to see my average bedtime and wake-up time and how my last night differs from them, so that I can see how regular my sleep rhythm is.
 
 **Acceptance criteria**
-- **Rule 1 – Free pizza:** If an order contains **more than 3** pizzas in total (sum of all quantities), the cheapest pizza (one piece) is free.
-- **Rule 2 – 10 % discount:** If the amount after Rule 1 is **CHF 50.00 or more**, a discount of 10 % is deducted from that amount.
-- Rule 1 is always applied before Rule 2.
-- Each applied discount is listed with its name and amount, e.g., `Free pizza: Funghi (-CHF 9.00)` or `10% discount (-CHF 5.25)`.
-- The final total is displayed with two decimal places.
+- [ ] The program averages the last 7 logged nights and displays `Average bedtime: 23:00 | Average wake-up: 07:00`.
+- [ ] The difference of the last night is shown in minutes, e.g., `Last night: bedtime 30min later, wake-up 15min earlier than average`.
+- [ ] Bedtimes around midnight are averaged correctly: given `23:30` and `00:30`, then the average bedtime is `00:00` (not `12:00`).
+- [ ] Given the last night matches the average exactly, then `0min` difference is displayed.
+- [ ] Given fewer than 3 entries, then `⚠️ At least 3 nights are needed.` is displayed.
 
-| Given this order | Subtotal | Discount(s) applied | Then the total is |
-|------------------|---------:|---------------------|------------------:|
-| 2x Margherita | 25.00 | none | **CHF 25.00** |
-| 1x Margherita, 1x Salami, 1x Funghi, 1x Hawaii (4 pizzas) | 50.50 | Free pizza: Funghi (-9.00) → 41.50 is below 50.00, so no 10 % | **CHF 41.50** |
-| 3x Diavola (3 pizzas) | 52.50 | 10% discount (-5.25) | **CHF 47.25** |
-| 1x Salami, 2x Diavola (exactly CHF 50.00) | 50.00 | 10% discount (-5.00) | **CHF 45.00** |
-| 2x Diavola, 1x Hawaii (CHF 49.00) | 49.00 | none | **CHF 49.00** |
-| 4x Diavola, 1x Funghi (5 pizzas) | 79.00 | Free pizza: Funghi (-9.00) → 70.00; 10% discount (-7.00) | **CHF 63.00** |
+## US-09: Get a personal sleep recommendation
+**Assigned to:** Member B
 
----
-
-#### US-07: See an order summary
-
-**As a** customer, **I want** to see a summary of my complete order before the invoice is created, **so that** I can check that everything is correct.
+As a user, I want a sleep recommendation (target duration and ideal bedtime), so that I know what to aim for.
 
 **Acceptance criteria**
-- The summary is shown after the staff member enters `done`.
-- The summary starts with the heading `--- ORDER SUMMARY ---`.
-- It lists every ordered item with quantity, name, size, and item total, e.g., `2x Margherita (Medium) - CHF 25.00`.
-- It lists every applied discount (see US-06).
-- It ends with the final amount in the format `TOTAL: CHF <amount>` with two decimal places.
-- *Given* the staff member enters `done` without having added any pizza, *when* the order is finished, *then* the message `⚠️ No pizzas selected.` is displayed, no summary and no invoice are created, and the main menu is shown again.
+- [ ] The target duration is displayed as `Target: 8h 00min`.
+- [ ] The user enters the desired wake-up time as `HH:MM`. Invalid input shows `⚠️ Invalid time. Use HH:MM.` and asks again.
+- [ ] The ideal bedtime is the desired wake-up time minus 8h 00min.
+- [ ] Given a desired wake-up of `07:00`, then `Ideal bedtime: 23:00` is displayed.
+- [ ] Given a desired wake-up of `06:00`, then `Ideal bedtime: 22:00` is displayed.
+- [ ] Given a desired wake-up of `05:30`, then `Ideal bedtime: 21:30` is displayed.
 
----
+## US-10: Get a daily readiness score
+**Assigned to:** Member C
 
-#### US-08: Save the invoice as a file
-
-**As an** owner, **I want** each completed order to be saved as a numbered invoice file, **so that** I have a permanent record of all sales.
-
-**Acceptance criteria**
-- An invoice file is created automatically for every order that contains at least one pizza.
-- The file name follows the pattern `invoice_<NNN>.txt` with a three-digit number, e.g., `invoice_001.txt`.
-- *Given* no invoice file exists yet, *when* an order is completed, *then* the file `invoice_001.txt` is created.
-- *Given* `invoice_001.txt` and `invoice_002.txt` already exist, *when* an order is completed, *then* the file `invoice_003.txt` is created and the existing files remain unchanged.
-- The invoice contains the heading `🍕 PIZZA RP INVOICE`, one line per ordered item (quantity, name, size, item total), all applied discounts, and the line `TOTAL: CHF <amount>`.
-- The amounts in the invoice file are identical to the amounts shown in the order summary (US-07).
-- After saving, the message `✅ Invoice saved as invoice_<NNN>.txt` is displayed.
-
----
-
-#### US-09: Exit the application
-
-**As a** staff member, **I want** to close the application via the main menu, **so that** I can end my shift in a controlled way.
+As a user, I want a daily readiness score (0-100) based on my sleep length, quality, and consistency, so that I know how recovered I am.
 
 **Acceptance criteria**
-- *Given* the main menu is displayed, *when* the staff member enters `3`, *then* the message `Goodbye 👋` is displayed and the program ends.
-- All invoices created during the session remain saved after the program has ended.
+- [ ] The score is the sum of three parts, rounded to a whole number:
+  - Duration (max. 50): `min(duration / 8h, 1) × 50`
+  - Quality (max. 30): `quality / 5 × 30`, using the morning rating from US-02
+  - Consistency (max. 20): 20 if the bedtime differs ≤ 30min from the 7-night average, otherwise 0
+- [ ] Given 8h 00min sleep, quality 4, and a bedtime difference of 20min, then the score is 50 + 24 + 20 = **94**.
+- [ ] Given 6h 30min sleep, quality 3, and a bedtime difference of 45min, then the score is 40.6 + 18 + 0 = **59** (rounded).
+- [ ] Sleeping longer than 8h 00min does not raise the duration part above 50.
+- [ ] Given fewer than 3 entries, the consistency part is 0 and `ℹ️ Consistency needs at least 3 nights.` is displayed.
+- [ ] Given no quality rating for last night, then `⚠️ Rate your morning first (US-02).` is displayed and no score is shown.
+- [ ] The output reads `Readiness score: <score>/100` and states that it is only an estimate.
 
----
+## US-11: Get a training recommendation
+**Assigned to:** Member C
 
+As an athlete, I want a training recommendation (hard / easy / rest day) based on my readiness score, so that I train effectively without overtraining.
+
+**Acceptance criteria**
+- [ ] The recommendation follows the readiness score:
+
+| Score | Recommendation |
+|---|---|
+| 75-100 | `💪 Hard workout` |
+| 50-74 | `🚶 Easy workout` |
+| 0-49 | `🛌 Rest day` |
+
+- [ ] Given a score of 94, then `💪 Hard workout` is displayed. Given 59, then `🚶 Easy workout`. Given 40, then `🛌 Rest day`.
+- [ ] Boundary values: 75 → hard, 74 → easy, 50 → easy, 49 → rest.
+- [ ] Given no entries, then `⚠️ No data yet. Log a night first.` is displayed.
+
+## US-12: Get sleep tips based on caffeine and alcohol
+**Assigned to:** Member C
+
+As a user, I want to receive tips based on the caffeine and alcohol I logged, so that I can support better sleep.
+
+**Acceptance criteria**
+- [ ] Given `caffeine = Yes` for last night (see US-03), then `☕ Avoid caffeine after 14:00.` is displayed.
+- [ ] Given `alcohol = Yes` for last night, then `🍷 Avoid alcohol in the 3 hours before bedtime.` is displayed.
+- [ ] Given both are `Yes`, then both tips are displayed.
+- [ ] Given both are `No`, then `✅ No caffeine or alcohol logged. Keep it up!` is displayed.
+- [ ] Given no entries, then `⚠️ No data yet. Log a night first.` is displayed.
 
 **Use cases:**
 - Show Menu (from `menu.txt`)
