@@ -60,24 +60,6 @@ People who aknowledge that they have to improve their sleep can use our programm
 
 A simple terminal program in Python (Programming Foundations, BSc Business Information Technology, FHNW). The user enters data in the console and the program saves it to a CSV file.
 
-## Conventions
-
-- Data is stored in `sleep_log.csv` (one line per night): `date;bedtime;wake_time;minutes_to_fall_asleep;quality;caffeine;alcohol`.
-- Times use the format `HH:MM` (e.g., `23:30`). Durations are displayed as `<h>h <mm>min` (e.g., `7h 30min`).
-- A night can cross midnight: bedtime `23:30` and wake-up `07:00` give 7h 30min.
-- "Week" means the last 7 logged nights, "month" means the last 30 logged nights.
-- The sleep target is fixed at 8h 00min.
-
-## Assignment of user stories
-
-| Team member | User stories |
-|---|---|
-| Friend | US-01, US-02, US-03 |
-| Member A | US-04, US-05, US-06 |
-| Member B | US-07, US-08, US-09 |
-| Member C | US-10, US-11, US-12 |
-
----
 
 ## US-01: Track Time to Fall Asleep
 **Assigned to:** Friend
