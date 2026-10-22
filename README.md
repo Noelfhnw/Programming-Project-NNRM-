@@ -62,44 +62,51 @@ A simple terminal program in Python (Programming Foundations, BSc Business Infor
 
 
 ## US-01: Track Time to Fall Asleep
-**Assigned to:** Friend
+**Assigned to:** Maryna
 
 As a Worker I want to enter how many minutes it took me to fall asleep, so that I can track my sleep and understand how quickly I fall asleep.
 
 **Acceptance Criteria:**
+- [ ] The program asks the worker to enter how many minutes it took to fall asleep.
+- [ ] Given a valid input of 20, the program saves 20 minutes together with today's date.
+- [ ] Given an invalid input such as -5 or abc, then ⚠️ Invalid input. Enter a non-negative number of minutes. is displayed, and the question is asked again.
+- [ ] After saving, ✅ Fall-asleep time saved. is displayed.
+- [ ] The worker can view previously recorded fall-asleep times together with their dates.
+- [ ] Given three recorded times of 10, 20, and 30 minutes within the last 7 days, then Weekly average fall-asleep time: 20 minutes (3 entries) is displayed.
+- [ ] Given no entries in the last 7 days, then ⚠️ No sleep data available for the last 7 days. is displayed.
 
-1. The worker can enter the time it took to fall asleep in minutes.
-2. Maybe : The application displays an error message if the user enters an invalid value, such as text or a negative number ????
-3. The application saves the entered time.
-4. The user can view previously recorded times.
-5. Maybe: The application calculates the average time it takes to fall asleep over the last 7 days --- ???
 
 ## US-02: Rate Morning Sleep Quality
-**Assigned to:** Friend
+**Assigned to:** Maryna
 
 As a Student I want to rate how rested I feel each morning on a scale from 1 to 5, so that I can track my sleep quality, not just my sleep duration.
 
 **Acceptance Criteria:**
-
-1. The student can rate how rested they feel each morning using a scale from `1` to `5`
-2. The application accepts only whole numbers between `1` and `5`.
-3. The application displays an error message if the user enters an invalid rating.
-4. The rating scale is clearly explained:
+- [ ] The program asks the student to rate how rested they feel each morning on a scale from 1 to 5.
+- [ ]  The rating scale is clearly explained:
    * `1` = Very tired
    * `2` = Tired
    * `3` = Neutral
    * `4` = Rested
    * `5` = Very rested
+- [ ] Given a valid input of 4, the program saves the rating together with today's date.
+- [ ] Given an invalid input such as 0, 6, 2.5, or abc, then ⚠️ Invalid rating. Enter a whole number from 1 to 5. is displayed, and the question is asked again.
+- [ ] After saving, ✅ Restedness rating saved. is displayed.
+- [ ] The student can view previously recorded ratings together with their dates.
+
 
 ## US-03: Track Caffeine and Alcohol Consumption
-**Assigned to:** Friend
+**Assigned to:** Maryna
 
 As a Fitness Enthusiast, I want to record whether I consumed caffeine or alcohol during the day, so that I can understand how these habits may affect my sleep quality.
 
 **Acceptance Criteria:**
-
-1. The Fitness Enthusiast can indicate whether they consumed caffeine, alcohol (`Yes/No`).
-2. Maybe: The application compares caffeine and alcohol consumption with sleep duration, sleep quality, and mood ratings, and provides personalized recommendations to help improve  sleep and overall well-being ---???
+- [ ] The program asks the user whether they consumed caffeine during the day (Yes/No).
+- [ ] The program asks the user whether they consumed alcohol during the day (Yes/No).
+- [ ] Given valid inputs of Yes for caffeine and No for alcohol, the program saves both answers together with today's date.
+- [ ] Given an invalid input such as Maybe or 123, then ⚠️ Invalid input. Please enter Yes or No. is displayed, and the question is asked again.
+- [ ] After saving, ✅ Daily habits saved. is displayed.
+- [ ] The user can view previously recorded caffeine and alcohol consumption together with their dates.
 
 ---
 
