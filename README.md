@@ -249,6 +249,83 @@ As a user, I want to receive tips based on the caffeine and alcohol I logged, so
 
 ---
 
+# 📝 User Inputs
+ 
+This document lists all inputs the program asks the user for. The date is never asked; it is always today's date (or the date of the night being entered).
+ 
+## 1. Daily Inputs (once per day)
+ 
+| Input | Question | Allowed values | Invalid example | Error message |
+|---|---|---|---|---|
+| **Morning rating** | How rested do you feel this morning? | Whole number 1–5 | `0`, `6`, `2.5`, `abc` | ⚠️ Invalid rating. Enter a whole number from 1 to 5. |
+| **Caffeine** | Did you consume caffeine after 14:00? | `Yes` / `No` | `Maybe`, `123` | ⚠️ Invalid input. Please enter Yes or No. |
+| **Alcohol** | Did you consume alcohol after 14:00? | `Yes` / `No` | `Maybe`, `123` | ⚠️ Invalid input. Please enter Yes or No. |
+ 
+**Morning rating scale:**
+ 
+| Rating | Meaning |
+|---|---|
+| 1 | Very tired (bad) |
+| 2 | Tired |
+| 3 | Neutral |
+| 4 | Rested |
+| 5 | Very rested (good) |
+ 
+## 2. Sleep Inputs (weekly data input)
+ 
+The sleep data is entered for a time horizon of one week (7 nights). For each night, the program asks:
+ 
+| Input | Question | Allowed values | Invalid example | Error message |
+|---|---|---|---|---|
+| **Bedtime** | When did you go to bed? | `HH:MM` (00:00–23:59) | `25:00`, `7pm` | ⚠️ Invalid time. Use HH:MM. |
+| **Wake-up time** | When did you wake up? | `HH:MM` (00:00–23:59) | `25:00`, `7pm` | ⚠️ Invalid time. Use HH:MM. |
+| **Time to fall asleep** | How long did it take you to fall asleep? | `short` / `medium` / `long` | `fast`, `20` | ⚠️ Invalid choice. Enter short, medium or long. |
+ 
+**Time to fall asleep categories:**
+ 
+| Category | Duration |
+|---|---|
+| short | less than 15 min |
+| medium | 15–30 min |
+| long | more than 30 min |
+ 
+### Calculated sleep time
+ 
+The actual sleep time is calculated from the inputs, not entered by the user:
+ 
+```
+Sleep start   = Bedtime + time to fall asleep
+Sleep time    = Wake-up time − sleep start
+```
+ 
+The sleep time is rounded to 15 minutes.
+ 
+🚧 To decide: which number of minutes is used for each category in the calculation (e.g. short = 0 min, medium = 15 min, long = 30 min).
+ 
+## 3. Other Inputs
+ 
+| Input | Question | Allowed values | Error message |
+|---|---|---|---|
+| **Time period** (US-07) | Show week or month? | `week` / `month` | ⚠️ Invalid choice. |
+| **Desired wake-up time** (US-09) | When do you want to wake up? | `HH:MM` | ⚠️ Invalid time. Use HH:MM. |
+| **Main menu** | Choose an option | Number of a menu option | ⚠️ Invalid choice. |
+ 
+## 4. Validation Summary
+ 
+All inputs can be checked with four reusable functions (e.g. in `utils.py`):
+ 
+| Function | Used for |
+|---|---|
+| Whole number in a range | Morning rating, main menu |
+| Yes / No | Caffeine, alcohol |
+| Time `HH:MM` | Bedtime, wake-up time, desired wake-up time |
+| Choice from a list | Time to fall asleep, week/month |
+ 
+In none of the invalid cases does the program crash; it shows the error message and asks the question again.
+
+
+
+
 ## ✅ Project Requirements
 
 Each app must meet the following three criteria in order to be accepted (see also the official project guidelines PDF on Moodle):
