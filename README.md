@@ -60,9 +60,19 @@ People who aknowledge that they have to improve their sleep can use our programm
 
 A simple terminal program in Python (Programming Foundations, BSc Business Information Technology, FHNW). The user enters data in the console and the program saves it to a CSV file.
 
+## User Story Assignment
+
+| Member | User Stories | Status |
+|--------|--------------|--------|
+| Noel   | 1. <br>2. <br>3. | 1. ⬜ <br>2. ⬜ <br>3. ⬜ |
+| Nils   | 1. <br>2. <br>3. | 1. ⬜ <br>2. ⬜ <br>3. ⬜ |
+| Maryna | 1. <br>2. <br>3. | 1. ⬜ <br>2. ⬜ <br>3. ⬜ |
+| Ronald | 1. <br>2. <br>3. | 1. ⬜ <br>2. ⬜ <br>3. ⬜ |
+
+**Status legend:** ⬜ To do · 🟨 In progress · ✅ Done
 
 ## US-01: Track Time to Fall Asleep
-**Assigned to:** Maryna
+**Assigned to:** 
 
 As a Worker I want to enter how many minutes it took me to fall asleep, so that I can track my sleep and understand how quickly I fall asleep.
 
@@ -77,7 +87,7 @@ As a Worker I want to enter how many minutes it took me to fall asleep, so that 
 
 
 ## US-02: Rate Morning Sleep Quality
-**Assigned to:** Maryna
+**Assigned to:** 
 
 As a Student I want to rate how rested I feel each morning on a scale from 1 to 5, so that I can track my sleep quality, not just my sleep duration.
 
@@ -96,7 +106,7 @@ As a Student I want to rate how rested I feel each morning on a scale from 1 to 
 
 
 ## US-03: Track Caffeine and Alcohol Consumption
-**Assigned to:** Maryna
+**Assigned to:** 
 
 As a Fitness Enthusiast, I want to record whether I consumed caffeine or alcohol during the day, so that I can understand how these habits may affect my sleep quality.
 
@@ -111,7 +121,7 @@ As a Fitness Enthusiast, I want to record whether I consumed caffeine or alcohol
 ---
 
 ## US-04: Log bedtime and wake-up time
-**Assigned to:** Member A
+**Assigned to:** 
 
 As a user, I want to log my bedtime and wake-up time, so that the program knows how long I slept.
 
@@ -123,7 +133,7 @@ As a user, I want to log my bedtime and wake-up time, so that the program knows 
 - [ ] In none of the invalid cases does the program crash (no Python traceback).
 
 ## US-05: See how long I slept last night
-**Assigned to:** Member A
+**Assigned to:** 
 
 As a user, I want to see how long I slept last night, so that I get immediate feedback.
 
@@ -135,7 +145,7 @@ As a user, I want to see how long I slept last night, so that I get immediate fe
 - [ ] Given `sleep_log.csv` has no entries, then `⚠️ No data yet. Log a night first.` is displayed.
 
 ## US-06: See my weekly average sleep time
-**Assigned to:** Member A
+**Assigned to:** 
 
 As a user, I want to see my weekly average sleep time, so that I can spot trends.
 
@@ -148,7 +158,7 @@ As a user, I want to see my weekly average sleep time, so that I can spot trends
 - [ ] The average is rounded to the full minute.
 
 ## US-07: See my longest and shortest night
-**Assigned to:** Member B
+**Assigned to:** 
 
 As a user, I want to see my longest and shortest night of the week or month, so that I can identify outliers.
 
@@ -160,7 +170,7 @@ As a user, I want to see my longest and shortest night of the week or month, so 
 - [ ] Given no entries, then `⚠️ No data yet. Log a night first.` is displayed.
 
 ## US-08: Compare my last night to my average bedtime and wake-up time
-**Assigned to:** Member B
+**Assigned to:** 
 
 As a user, I want to see my average bedtime and wake-up time and how my last night differs from them, so that I can see how regular my sleep rhythm is.
 
@@ -172,7 +182,7 @@ As a user, I want to see my average bedtime and wake-up time and how my last nig
 - [ ] Given fewer than 3 entries, then `⚠️ At least 3 nights are needed.` is displayed.
 
 ## US-09: Get a personal sleep recommendation
-**Assigned to:** Member B
+**Assigned to:** 
 
 As a user, I want a sleep recommendation (target duration and ideal bedtime), so that I know what to aim for.
 
@@ -185,7 +195,7 @@ As a user, I want a sleep recommendation (target duration and ideal bedtime), so
 - [ ] Given a desired wake-up of `05:30`, then `Ideal bedtime: 21:30` is displayed.
 
 ## US-10: Get a daily readiness score
-**Assigned to:** Member C
+**Assigned to:** 
 
 As a user, I want a daily readiness score (0-100) based on my sleep length, quality, and consistency, so that I know how recovered I am.
 
@@ -202,7 +212,7 @@ As a user, I want a daily readiness score (0-100) based on my sleep length, qual
 - [ ] The output reads `Readiness score: <score>/100` and states that it is only an estimate.
 
 ## US-11: Get a training recommendation
-**Assigned to:** Member C
+**Assigned to:** 
 
 As an athlete, I want a training recommendation (hard / easy / rest day) based on my readiness score, so that I train effectively without overtraining.
 
@@ -220,7 +230,7 @@ As an athlete, I want a training recommendation (hard / easy / rest day) based o
 - [ ] Given no entries, then `⚠️ No data yet. Log a night first.` is displayed.
 
 ## US-12: Get sleep tips based on caffeine and alcohol
-**Assigned to:** Member C
+**Assigned to:** 
 
 As a user, I want to receive tips based on the caffeine and alcohol I logged, so that I can support better sleep.
 
