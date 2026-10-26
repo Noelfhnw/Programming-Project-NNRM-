@@ -1,3 +1,8 @@
+from datetime import date
+
+
+caffeine_records = []
+alcohol_records = []
 
 def caffeine_alcohol_consumption():
     while True:
@@ -16,8 +21,17 @@ def caffeine_alcohol_consumption():
             continue
         break
 
+    today = date.today()
+    record_caffeine = (str(today), "Caffeine: " + caffeine)
+    record_alcohol = (str(today), "Alcohol: " + alcohol)
 
-                
+    caffeine_records.append(record_caffeine)
+    alcohol_records.append(record_alcohol)
+
+    print(caffeine_records)
+    print(alcohol_records)
 
 
+caffeine_alcohol_consumption()
+caffeine_alcohol_consumption()
 caffeine_alcohol_consumption()
