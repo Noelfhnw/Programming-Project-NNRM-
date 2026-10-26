@@ -1,7 +1,5 @@
 from datetime import date
 
-from datetime import date
-
 sleep_records = []
 
 def record_sleep_minutes():
@@ -21,9 +19,12 @@ def record_sleep_minutes():
     today = date.today()
     record = (str(today), minutes)
     sleep_records.append(record)
+    print("✅ Fall-asleep time saved.")
 
     print("You fell asleep in", minutes, "minutes.")
     print("Sleep records:", sleep_records)
+
+    
 
 
 record_sleep_minutes()
