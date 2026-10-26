@@ -1,13 +1,21 @@
 
 def caffeine_alcohol_consumption():
     while True:
-        consumption = input("Did you consume caffeine or alcohol today? (yes/no): ").strip().lower()
+        caffeine = input("Did you consume caffeine today? (yes/no): ").strip().lower()
 
-        if consumption not in ['yes', 'no']:
-            print("Please answer  'yes' or 'no'.")
+        if caffeine not in ['yes', 'no']:
+            print("Please answer 'yes' or 'no'.")
             continue
-        else: 
-            break
+        break
+
+    while True:
+        alcohol = input("Did you consume alcohol today? (yes/no): ").strip().lower()
+
+        if alcohol not in ['yes', 'no']:
+            print("Please answer 'yes' or 'no'.")
+            continue
+        break
+
 
                 
 
