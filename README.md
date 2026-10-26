@@ -66,7 +66,7 @@ A simple terminal program in Python (Programming Foundations, BSc Business Infor
 |--------|--------------|--------|
 | Noel   | US-4,5,6 | 1. ⬜ <br>2. ⬜ <br>3. ⬜ |
 | Nils   | US-7,8,9 | 1. ⬜ <br>2. ⬜ <br>3. ⬜ |
-| Maryna | US-1,3,12 | 1. 🟨  <br>2. ⬜ <br>3. ⬜ |
+| Maryna | US-1,3,12 | 1. 🟨  <br>2. 🟨 <br>3. ⬜ |
 | Ronald | US-2,10,11 | 1. ⬜ <br>2. ⬜ <br>3. ⬜ |
 
 **Status legend:** ⬜ To do · 🟨 In progress · ✅ Done
@@ -77,13 +77,13 @@ A simple terminal program in Python (Programming Foundations, BSc Business Infor
 As a Worker I want to enter how many minutes it took me to fall asleep, so that I can track my sleep and understand how quickly I fall asleep.
 
 **Acceptance Criteria:**
-- [ ] The program asks the worker to enter how many minutes it took to fall asleep.
-- [ ] Given a valid input of 20, the program saves 20 minutes together with today's date.
-- [ ] Given an invalid input such as -5 or abc, then ⚠️ Invalid input. Enter a non-negative number of minutes. is displayed, and the question is asked again.
-- [ ] After saving, ✅ Fall-asleep time saved. is displayed.
-- [ ] The worker can view previously recorded fall-asleep times together with their dates.
-- [ ] Given three recorded times of 10, 20, and 30 minutes within the last 7 days, then Weekly average fall-asleep time: 20 minutes (3 entries) is displayed.
-- [ ] Given no entries in the last 7 days, then ⚠️ No sleep data available for the last 7 days. is displayed.
+- [✅] The program asks the worker to enter how many minutes it took to fall asleep.
+- [✅] Given a valid input of 20, the program saves 20 minutes together with today's date.
+- [✅] Given an invalid input such as -5 or abc, then ⚠️ Invalid input. Enter a non-negative number of minutes. is displayed, and the question is asked again.
+- [✅] After saving, ✅ Fall-asleep time saved. is displayed.
+- [🟨] The worker can view previously recorded fall-asleep times together with their dates.
+- [🟨] Given three recorded times of 10, 20, and 30 minutes within the last 7 days, then Weekly average fall-asleep time: 20 minutes (3 entries) is displayed.
+- [🟨] Given no entries in the last 7 days, then ⚠️ No sleep data available for the last 7 days. is displayed.
 
 
 ## US-02: Rate Morning Sleep Quality
@@ -111,12 +111,12 @@ As a Student I want to rate how rested I feel each morning on a scale from 1 to 
 As a Fitness Enthusiast, I want to record whether I consumed caffeine or alcohol during the day, so that I can understand how these habits may affect my sleep quality.
 
 **Acceptance Criteria:**
-- [ ] The program asks the user whether they consumed caffeine during the day (Yes/No).
-- [ ] The program asks the user whether they consumed alcohol during the day (Yes/No).
-- [ ] Given valid inputs of Yes for caffeine and No for alcohol, the program saves both answers together with today's date.
-- [ ] Given an invalid input such as Maybe or 123, then ⚠️ Invalid input. Please enter Yes or No. is displayed, and the question is asked again.
-- [ ] After saving, ✅ Daily habits saved. is displayed.
-- [ ] The user can view previously recorded caffeine and alcohol consumption together with their dates.
+- [✅] The program asks the user whether they consumed caffeine during the day (Yes/No).
+- [✅] The program asks the user whether they consumed alcohol during the day (Yes/No).
+- [✅] Given valid inputs of Yes for caffeine and No for alcohol, the program saves both answers together with today's date.
+- [✅] Given an invalid input such as Maybe or 123, then ⚠️ Invalid input. Please enter Yes or No. is displayed, and the question is asked again.
+- [✅] After saving, ✅ Daily habits saved. is displayed.
+- [🟨] The user can view previously recorded caffeine and alcohol consumption together with their dates.
 
 ---
 
