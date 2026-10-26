@@ -66,7 +66,7 @@ A simple terminal program in Python (Programming Foundations, BSc Business Infor
 |--------|--------------|--------|
 | Noel   | US-4,5,6 | 1. ⬜ <br>2. ⬜ <br>3. ⬜ |
 | Nils   | US-7,8,9 | 1. ⬜ <br>2. ⬜ <br>3. ⬜ |
-| Maryna | US-1,3,12 | 1. ⬜ <br>2. ⬜ <br>3. ⬜ |
+| Maryna | US-1,3,12 | 1. 🟨  <br>2. ⬜ <br>3. ⬜ |
 | Ronald | US-2,10,11 | 1. ⬜ <br>2. ⬜ <br>3. ⬜ |
 
 **Status legend:** ⬜ To do · 🟨 In progress · ✅ Done
