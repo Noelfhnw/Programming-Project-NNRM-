@@ -66,7 +66,7 @@ A simple terminal program in Python (Programming Foundations, BSc Business Infor
 |--------|--------------|--------|
 | Noel   | US-4,5,6 | 1. ⬜ <br>2. ⬜ <br>3. ⬜ |
 | Nils   | US-7,8,9 | 1. ⬜ <br>2. ⬜ <br>3. ⬜ |
-| Maryna | US-1,3,12 | 1. 🟨  <br>2. 🟨 <br>3. ⬜ |
+| Maryna | US-1,3,12 | 1. 🟨  <br>2. 🟨 <br>3. 🟨  |
 | Ronald | US-2,10,11 | 1. ⬜ <br>2. ⬜ <br>3. ⬜ |
 
 **Status legend:** ⬜ To do · 🟨 In progress · ✅ Done
@@ -235,11 +235,11 @@ As an athlete, I want a training recommendation (hard / easy / rest day) based o
 As a user, I want to receive tips based on the caffeine and alcohol I logged, so that I can support better sleep.
 
 **Acceptance criteria**
-- [ ] Given `caffeine = Yes` for last night (see US-03), then `☕ Avoid caffeine after 14:00.` is displayed.
-- [ ] Given `alcohol = Yes` for last night, then `🍷 Avoid alcohol in the 3 hours before bedtime.` is displayed.
-- [ ] Given both are `Yes`, then both tips are displayed.
-- [ ] Given both are `No`, then `✅ No caffeine or alcohol logged. Keep it up!` is displayed.
-- [ ] Given no entries, then `⚠️ No data yet. Log a night first.` is displayed.
+- [✅] Given `caffeine = Yes` for last night (see US-03), then `☕ Avoid caffeine after 14:00.` is displayed.
+- [✅] Given `alcohol = Yes` for last night, then `🍷 Avoid alcohol in the 3 hours before bedtime.` is displayed.
+- [✅] Given both are `Yes`, then both tips are displayed.
+- [✅] Given both are `No`, then `✅ No caffeine or alcohol logged. Keep it up!` is displayed.
+- [🟨] Given no entries, then `⚠️ No data yet. Log a night first.` is displayed.
 
 **Use cases:**
 - Show Menu (from `menu.txt`)
