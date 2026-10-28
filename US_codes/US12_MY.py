@@ -11,7 +11,10 @@ def give_sleep_tips():
         print("☕ Avoid caffeine after 14:00")
 
     if alcohol == "yes":
-        print("🍷 Avoid alcohol in the 3 hours before bedtime.")    
+        print("🍷 Avoid alcohol in the 3 hours before bedtime.")   
+
+    if caffeine == "no" and alcohol == "no":
+        print("✅ No caffeine or alcohol logged. Keep it up!")     
 
 
 give_sleep_tips()
