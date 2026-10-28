@@ -29,10 +29,13 @@ def caffeine_alcohol_consumption():
     alcohol_records.append(record_alcohol)
     print("✅ Caffeine and alcohol consumption saved.")
 
+
     print(caffeine_records)
     print(alcohol_records)
+    
+    return caffeine, alcohol
 
-
-caffeine_alcohol_consumption()
-caffeine_alcohol_consumption()
-caffeine_alcohol_consumption()
+if __name__ == "__main__":
+    caffeine_alcohol_consumption()
+    caffeine_alcohol_consumption()
+    caffeine_alcohol_consumption()
