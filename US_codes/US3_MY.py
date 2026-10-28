@@ -9,7 +9,7 @@ def caffeine_alcohol_consumption():
         caffeine = input("Did you consume caffeine today? (yes/no): ").strip().lower()
 
         if caffeine not in ['yes', 'no']:
-            print("Please answer 'yes' or 'no'.")
+            print("⚠️ Invalid input. Please enter Yes or No.")
             continue
         break
 
@@ -17,7 +17,7 @@ def caffeine_alcohol_consumption():
         alcohol = input("Did you consume alcohol today? (yes/no): ").strip().lower()
 
         if alcohol not in ['yes', 'no']:
-            print("Please answer 'yes' or 'no'.")
+            print("⚠️ Invalid input. Please enter Yes or No.")
             continue
         break
 
@@ -32,7 +32,6 @@ def caffeine_alcohol_consumption():
 
     print(caffeine_records)
     print(alcohol_records)
-    
     return caffeine, alcohol
 
 if __name__ == "__main__":
