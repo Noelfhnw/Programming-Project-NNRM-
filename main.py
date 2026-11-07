@@ -14,3 +14,35 @@ def show_menu():
     print()
     print("----------------------------------------------")
     print("4. Exit")
+
+
+def add_sleep_data():
+    print("TO DO add_slee_data")
+
+def daily():
+    print("TO DO daily")
+
+def weekly():
+    print("TO DO weekly")
+        
+
+def main():
+    while True:
+        show_menu()
+        auswahl = input("choose an option: ")
+        if auswahl == "1" :
+            add_sleep_data()
+        elif auswahl == "2":
+            daily()
+        elif auswahl == "3":
+            weekly()
+        elif auswahl == "4":
+            break
+        else:
+            print("-------------------------------")
+            print("")
+            print("        !WRONG INPUT!")
+            print("")
+            print("-------------------------------")
+
+main()
