@@ -72,6 +72,11 @@ For which day do you wannt to enter or change data?
     chosen_day = int(input("Choose a day (1-7): "))
     day = days[chosen_day -1]
 
+    if chosen_day == 7:
+        next_day ="Monday"
+    else:
+        next_day = days[chosen_day]
+    
     print(f"""
 === Enter changing Data ===
     
@@ -87,7 +92,29 @@ Which value do you want to enter or change for {day}?
     
     chosen_field = int(input("Choose the data you want to log (1-5): "))
     field = fields[chosen_field -1]
-    print (field)
+    print (f"""
+=== Enter {field} of {day} ===
+
+    """)
+
+
+    if field == "Bedtime":
+        bedtime_data = input(f"Type in the time you went to bed on {day} (HH:MM): ")
+        data[day]["Bedtime"] = bedtime_data
+    elif field == "Wake-up time":
+        wake_up_data = input(f"When did you wake up on {next_day} (HH:MM): ")
+        data[day]["Wake-up time"]= wake_up_data
+    elif field == "Time to fall asleep":
+        fall_asleep_data = input(f"How long did it take you to fall asleep on {day} (HH:MM): ")
+        data[day]["Time to fall asleep"]= fall_asleep_data
+    elif field == "Morning rating":
+        morning_rating_data = int(input(f"How good to you feel after get up on {next_day} on a scale from (1-5) --> (1=miserable, 2=bad, 3=okay, 4=good, 5=very good): "))
+        data[day]["Morning rating"]= morning_rating_data
+    elif field == "Caffeine_Alcohol consume":
+        caffeine_alcohol_data = input(f"Did you consume Caffeine or Alcohol after 2pm on {day} (yes/no): ").strip().lower()
+        data[day]["Caffeine_Alcohol consume"]= caffeine_alcohol_data
+
+
 
 data = create_data()
 menu_sleep_data(data)
