@@ -42,20 +42,6 @@ People who aknowledge that they have to improve their sleep can use our programm
 
 ### 📖 User Stories
 
-> 🚧 **How to write a good user story**
->
-> - Use the scheme **"As a *&lt;role&gt;*, I want *&lt;capability&gt;*, so that *&lt;benefit&gt;*."**
->   The benefit ("so that …") explains *why* the story is valuable. If you cannot name a benefit, question whether the story is needed.
-> - A story consists of three parts, the "three Cs": the **Card** (the short sentence), the **Conversation** (the details discussed within the team), and the **Confirmation** (the acceptance criteria, which show when the story is done).
-> - Check each story against **INVEST**: **I**ndependent, **N**egotiable, **V**aluable, **E**stimable, **S**mall, **T**estable.
-> - **Acceptance criteria** must be *specific* and *testable*. Use concrete values (e.g., "CHF 25.00", "two decimal places") and avoid vague words such as "fast", "easy", "correct", or "user-friendly". A good criterion can be turned directly into a test case with an input and an expected output.
-> - Write acceptance criteria either as a **checklist** of observable rules or in the **Given–When–Then** structure:
->   *Given* a starting situation, *when* an action happens, *then* a specific, observable result occurs.
-> - Include at least one criterion for the **normal case** and one for an **edge case or invalid input** (e.g., a quantity of 0, an empty order, a missing file).
->
-> 💡 The stories below are examples for PizzaRP. Replace them with the stories of your own project.
-
-
 # 😴 Sleep Tracker: User Stories
 
 A simple terminal program in Python (Programming Foundations, BSc Business Information Technology, FHNW). The user enters data in the console and the program saves it to a CSV file.
