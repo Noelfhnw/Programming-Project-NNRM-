@@ -441,9 +441,11 @@ These libraries are part of the Python standard library, so no external installa
 
 | Name       | Contribution                                 |
 |------------|----------------------------------------------|
-| Student A  | Menu reading (file input) and displaying menu|
-| Student B  | Order logic and data validation              |
-| Student C  | Invoice generation (file output) and slides  |
+| Noel       | Task 4, 5 and 6								|
+| Nils       | Task 7, 8 and 9								|
+| Maryna     | Task 1, 3 and 12								|
+| Ronald     | Task 2, 10 and 11								|
+
 
 
 ## 🤝 Contributing
