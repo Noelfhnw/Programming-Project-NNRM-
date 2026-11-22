@@ -1,6 +1,22 @@
 #add sleep data file
 #all inputs
 
+import json
+import os
+
+def save_data(data):
+    with open ("sleep_data.json", "w") as file:
+        json.dump(data, file)
+
+def load_data():
+    if os.path.exists("sleep_data.json"):
+        with open ("sleep_data.json", "r") as file:
+            return json.load(file)
+    else:
+        data = create_data()
+        save_data(data)
+        return data
+
 days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 fields = ["Bedtime", "Wake-up time", "Time to fall asleep", "Morning rating", "Caffeine_Alcohol consume"]
 
@@ -137,6 +153,7 @@ Which value do you want to enter or change for {day}?
                 if len(bedtime_data) == 4:
                     bedtime_data = "0" + bedtime_data
             data[day]["Bedtime"] = bedtime_data
+            save_data(data)
 
         elif field == "Wake-up time":
             wake_up_data = input(f"When did you wake up on {next_day} (HH:MM): ")
@@ -148,6 +165,7 @@ Which value do you want to enter or change for {day}?
                 if len(wake_up_data) == 4:
                     wake_up_data = "0" + wake_up_data
             data[day]["Wake-up time"]= wake_up_data
+            save_data(data)
 
         elif field == "Time to fall asleep":
             fall_asleep_data = input(f"How long did it take you to fall asleep on {day} (HH:MM): ")
@@ -159,6 +177,7 @@ Which value do you want to enter or change for {day}?
                 if len(fall_asleep_data) == 4:
                     fall_asleep_data = "0" + fall_asleep_data
             data[day]["Time to fall asleep"]= fall_asleep_data
+            save_data(data)
 
         elif field == "Morning rating":
             morning_rating_data = input(f"How good do you feel after getting up on {next_day} on a scale from (1-5) --> (1=miserable, 2=bad, 3=okay, 4=good, 5=very good): ")
@@ -166,6 +185,7 @@ Which value do you want to enter or change for {day}?
                 print("Invalid input! --> enter a number between 1-5")
                 morning_rating_data = input(f"How good do you feel after getting up on {next_day} on a scale from (1-5) --> (1=miserable, 2=bad, 3=okay, 4=good, 5=very good): ")
             data[day]["Morning rating"]= morning_rating_data
+            save_data(data)
 
         elif field == "Caffeine_Alcohol consume":
             caffeine_alcohol_data = input(f"Did you consume Caffeine or Alcohol after 2pm on {day} (yes/no): ").strip().lower()
@@ -173,6 +193,7 @@ Which value do you want to enter or change for {day}?
                 print("Invalid input! --> enter yes or no")
                 caffeine_alcohol_data = input(f"Did you consume Caffeine or Alcohol after 2pm on {day} (yes/no): ").strip().lower()
             data[day]["Caffeine_Alcohol consume"]= caffeine_alcohol_data
+            save_data(data)
 
 
 def time_input_valid_bedtime_data(bedtime_data):
@@ -242,7 +263,7 @@ def input_valid_caffeine_alcohol_data(caffeine_alcohol_data):
         return False
     return True
 
-data = create_data()
+data = load_data()
 menu_sleep_data(data)
 
 
