@@ -1,47 +1,45 @@
 import add_Sleep_data
 
+# Convert time from HH:MM to minutes
+def time_to_minutes(time):
+    hours = int(time[0:2])
+    minutes = int(time[3:5])
 
-# Calculate sleep duration in minutes for a selected day
-def calculate_sleep_duration(data, day):
+    return hours * 60 + minutes
 
-    # Get sleep data for the selected day
+
+# Get sleep times for a selected day and convert them to minutes
+def get_sleep_times(data, day):
     bedtime = data[day]["Bedtime"]
     wake_up = data[day]["Wake-up time"]
     fall_asleep = data[day]["Time to fall asleep"]
 
-    # print(bedtime)
-    # print(wake_up)
-    # print(fall_asleep)
+    if bedtime is not None:
+        bedtime = time_to_minutes(bedtime)
 
-    # Check if data is available ( To prevent the program from throwing an error when generating a weekly report—for exam, in cases where the user has only filled in three out of the seven days)
+    if wake_up is not None:
+        wake_up = time_to_minutes(wake_up) + 24 * 60
+
+    if fall_asleep is not None:
+        fall_asleep = time_to_minutes(fall_asleep)
+
+    return bedtime, wake_up, fall_asleep
+
+
+# Calculate sleep duration in minutes for a selected day
+def calculate_sleep_duration(data, day):
+    bedtime, wake_up, fall_asleep = get_sleep_times(data, day)
+
     if bedtime is None or wake_up is None or fall_asleep is None:
         return None
 
+    duration = wake_up - bedtime - fall_asleep
+    # print("Actual sleep duration:", duration)
 
-    # Convert time to minutes
-    bedtime_minutes = int(bedtime[0:2]) * 60 + int(bedtime[3:5])
-    wake_up_minutes = int(wake_up[0:2]) * 60 + int(wake_up[3:5])
-    fall_asleep_minutes = int(fall_asleep[0:2]) * 60 + int(fall_asleep[3:5])
-
-    # print("Bedtime in minutes:", bedtime_minutes)
-    # print("Wake-up time in minutes:", wake_up_minutes)
-    # print("Time to fall asleep in minutes:", fall_asleep_minutes)
-
-    # Handle sleep across midnight
-    wake_up_minutes += 24 * 60
-
-    print("Adjusted wake-up time:", wake_up_minutes)
-
-    # Calculate actual sleep duration
-    duration = wake_up_minutes - bedtime_minutes - fall_asleep_minutes
-    print("Actual sleep duration:", duration)
-
-    # Check if sleep duration is valid
     if duration < 0:
         return None
 
     return duration
-
 
 
 # Convert sleep duration from minutes to hours and minutes
@@ -61,14 +59,14 @@ def format_sleep_duration(duration):
 
 # Generate and save the weekly sleep report
 def weekly_overview():
-    # Load saved sleep data from the JSON file from add_Sleep_data.py
-    data_w = add_Sleep_data.load_data() 
 
-    print(data_w)
+    # Load saved sleep data from the JSON file
+    data_w = add_Sleep_data.load_data()
 
     # Open the TXT file in write mode
     with open("weekly_data.txt", "w", newline="") as file:
-    # Write the report title
+
+        # Write the report title
         file.write("=== Weekly Sleep Report ===\n\n")
 
         # Write sleep data for each day
@@ -78,19 +76,74 @@ def weekly_overview():
             for field, value in data_w[day].items():
                 file.write(f"{field}: {value}\n")
 
-            # Calculate sleep duration
-            duration = calculate_sleep_duration(data_w, day)
+            file.write("\n--- Calculated results ---\n")
 
-            # Format sleep duration
+            # Calculate and format sleep duration
+            duration = calculate_sleep_duration(data_w, day)
             formatted_duration = format_sleep_duration(duration)
 
+            print(f"Sleep duration: {formatted_duration}")
             # Write sleep duration to the report
-            file.write(f"*** Sleep duration: {formatted_duration} ***\n")
+            file.write(f"Sleep duration: {formatted_duration}\n")
+
+            # Calculate and format total time in bed
+            time_in_bed = calculate_time_in_bed(data_w, day)
+            formatted_time_in_bed = format_sleep_duration(time_in_bed)
+
+            print(f"Time in bed: {formatted_time_in_bed}")
+            # Write time in bed to the report
+            file.write(f"Time in bed: {formatted_time_in_bed}\n")
+
+            # Calculate sleep efficiency
+            efficiency = calculate_sleep_efficiency(data_w, day)
+
+            # Format sleep efficiency
+            if efficiency is None:
+                formatted_efficiency = "Not available"
+            else:
+                formatted_efficiency = f"{efficiency}%"
+
+            print(f"Sleep efficiency: {formatted_efficiency}")
+
+            # Write sleep efficiency to the report
+            file.write(f"Sleep efficiency: {formatted_efficiency}\n")
 
             file.write("\n")
 
     print("Weekly report saved successfully!")
 
+# Calculate total time in bed for a selected day
+def calculate_time_in_bed(data, day):
+
+    # Get sleep times in minutes
+    bedtime, wake_up, _ = get_sleep_times(data, day)
+
+    # Check if data is available
+    if bedtime is None or wake_up is None:
+        return None
+
+    # Calculate total time in bed
+    return wake_up - bedtime
+
+# Calculate sleep efficiency for a selected day
+def calculate_sleep_efficiency(data, day):
+
+    # Get calculated sleep duration and time in bed
+    duration = calculate_sleep_duration(data, day)
+    time_in_bed = calculate_time_in_bed(data, day)
+
+    # Check if data is available
+    if duration is None or time_in_bed is None:
+        return None
+
+    # Prevent division by zero
+    if time_in_bed == 0:
+        return None
+
+    # Calculate sleep efficiency
+    efficiency = duration / time_in_bed * 100
+
+    return round(efficiency, 2)
 
 if __name__ == "__main__":
 
