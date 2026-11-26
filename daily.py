@@ -10,6 +10,10 @@ days_for_average_wakeup = days
 
 day_d = days[daily_weekday]
 
+
+import os
+
+
 #print(daily_weekday)
 #-------------------------------------------ÄNDER VOR GEBRAUCH AKTUELL TEST DICT---------------------------------------------------------------------------
 #data_d = add_Sleep_data.create_data()
@@ -163,6 +167,48 @@ def sleep_score():
         return None
     return duration + rating + habits
 
+#------------------------------------------TXT FILE-----------------------------------------------------------
+
+def next_file():
+    number = 1
+    while os.path.exists(f"exports/daily_{number:03d}.txt"):
+        number += 1
+    return f"exports/daily_{number:03d}.txt"
+
+def export_daily():
+    os.makedirs("exports", exist_ok=True)
+    filename = next_file()
+    with open(filename, "w", encoding="utf-8") as file:
+        file.write(daily_text())
+    print(f"Exported to {filename}")
+
+def daily_text():
+    lines = []
+    lines.append(f"---Daily sleep review for {day_d} night---------------------------------------------------")
+    lines.append("")
+    lines.append("---Sleep summary:---")
+    lines.append("")
+    lines.append(f"You went to bed by: {data_d[day_d]['Bedtime']}")
+    lines.append(f"You woke up at: {data_d[day_d]['Wake-up time']}")
+    lines.append(f"It took you {data_d[day_d]['Time to fall asleep']} minutes to fall asleep")
+    lines.append(f"That puts your total sleep duration to: {sleep_time()}")
+    lines.append(caffeine_alcohol_Y_N_forData())
+    lines.append(morning_rating_forData())
+    lines.append("")
+    lines.append(f"---Sleep score for {day_d} night:---")
+    lines.append("")
+    lines.append(f"Your sleep score is {sleep_score()}/100")
+    lines.append(f"Sleep duration from 8h: {duration_points()}/50")
+    lines.append(f"Morning rating: {morning_rating_points()}/25")
+    lines.append(f"Caffeine and alcohol consumption: {caffeine_alcohol_points()}/25")
+    lines.append("")
+    lines.append("---Recommendation:---")
+    lines.append("")
+    lines.append(training_readiness())
+    lines.append(weekly_consitency())
+    lines.append(caffeine_alcohol_Y_N_forRecomendation())
+    return "\n".join(lines)   
+
 #------------------------------------------FRONT MENU---------------------------------------------------------  
 
 def daily():
@@ -200,9 +246,12 @@ def exit_to_main_menu():
         print()
         print("---------------------------------------------------------------------------------------")
         print("")
-        print("1. Exit to main menu")
+        print("1. Export to text file")
+        print("2. Exit to main menu")
         choice = input("choose an option: ")
         if choice == "1":
+            export_daily()
+        elif choice == "2":
             break
         else:
             print("-------------------------------")
