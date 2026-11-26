@@ -6,89 +6,210 @@ days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sun
 now = datetime.now()
 daily_weekday = now.isoweekday()-2
 
-for i in range(1, 5):
-    index = (daily_weekday)
-
 days_for_average_wakeup = days
 
 day_d = days[daily_weekday]
 
 #print(daily_weekday)
+#-------------------------------------------ÄNDER VOR GEBRAUCH AKTUELL TEST DICT---------------------------------------------------------------------------
+#data_d = add_Sleep_data.create_data()
+data_d = {
+    "Monday":    {"Bedtime": "23:00", "Wake-up time": "07:00", "Time to fall asleep": 10, "Morning rating": 3, "Caffeine_Alcohol consume": "yes"},
+    "Tuesday":   {"Bedtime": "23:30", "Wake-up time": "07:30", "Time to fall asleep": 20, "Morning rating": 4, "Caffeine_Alcohol consume": "no"},
+    "Wednesday": {"Bedtime": "23:30", "Wake-up time": "07:00", "Time to fall asleep": 15, "Morning rating": 4, "Caffeine_Alcohol consume": "no"},
+    "Thursday":  {"Bedtime": "03:00", "Wake-up time": "06:30", "Time to fall asleep": 0,  "Morning rating": 1, "Caffeine_Alcohol consume": "yes"},
+    "Friday":    {"Bedtime": "22:45", "Wake-up time": "06:45", "Time to fall asleep": 0,  "Morning rating": 2, "Caffeine_Alcohol consume": "yes"},
+    "Saturday":  {"Bedtime": "00:30", "Wake-up time": "07:15", "Time to fall asleep": 30, "Morning rating": 3, "Caffeine_Alcohol consume": "no"},
+    "Sunday":    {"Bedtime": "23:15", "Wake-up time": "07:00", "Time to fall asleep": 5,  "Morning rating": 5, "Caffeine_Alcohol consume": "no"},
+}
 
-data_d = add_Sleep_data.create_data()
-
+#------------------------------------------------------------------------------------------------------------------------------------------------------------------
     #print(day_d)   = Todaysweekday -1
     #print(data_d[day_d]) = the dict. of yesterday
     #print(data_d[day_d]["Wake-up time"]) = the specific data of yesterday
     #fields = ["Bedtime", "Wake-up time", "Time to fall asleep", "Morning rating", "Caffeine_Alcohol consume"]
+
+#-------------------------------------DAILY DATA------------------------------------------------------
 
 def sleep_time():
     bedtime_d = data_d[day_d]["Bedtime"]
     wake_up_time_d = data_d[day_d]["Wake-up time"]
     hours_bedtime_d, minutes_bedtime_d = bedtime_d.split(":")
     hours_wakeup_d, minutes_wakeup_d = wake_up_time_d.split(":")
-    bedtime_in_minutes = int(hours_bedtime_d) * 60 + int(minutes_bedtime_d) - int(data_d[day_d]["Time to fall asleep"])
+    bedtime_in_minutes = int(hours_bedtime_d) * 60 + int(minutes_bedtime_d) + int(data_d[day_d]["Time to fall asleep"])
     wakeuptime_in_minutes = int(hours_wakeup_d) * 60 + int(minutes_wakeup_d)
     sleepduration_in_minutes = wakeuptime_in_minutes - bedtime_in_minutes
     if sleepduration_in_minutes < 0:
         sleepduration_in_minutes += 24*60
     if sleepduration_in_minutes == 0:
-        print("Please check Input!")
+        return("Please check Input!")
     else:
-        print(f"{sleepduration_in_minutes // 60}h {sleepduration_in_minutes % 60}min")
-
-def caffeine_alcohol_Y_N_forRecomendation():
-    caffeine_alcohol = data_d[day_d]["Caffeine_Alcohol consume"] #mit Noel anschauen bez. Input von Data (TRUE/FALSE)
-    if caffeine_alcohol == "yes":
-        print("Tip: Try not to consume caffeine or alcohol after 2pm... it improves your sleep!")
-    if caffeine_alcohol == "no":
-        print("Great! You did not consume any caffeine or alcohol after 2pm... your body thanks you!")
-    else:
-        print("Please check Input!")
+        return(f"{sleepduration_in_minutes // 60}h {sleepduration_in_minutes % 60}min")
 
 def caffeine_alcohol_Y_N_forData():
     caffeine_alcohol = data_d[day_d]["Caffeine_Alcohol consume"]
     if caffeine_alcohol == "yes":
-        print("Yesterday you consumed caffeine or alcohol after 2pm!")
-    if caffeine_alcohol == "no":
-        print("Yesterday you did not consume caffeine or alcohol after 2pm!")
+        return("Yesterday you consumed caffeine or alcohol after 2pm!")
+    elif caffeine_alcohol == "no":
+        return("Yesterday you did not consume caffeine or alcohol after 2pm!")
     else:
-        print("Please check Input!")
+        return("Please check Input!")
 
 #(1=miserable, 2=bad, 3=okay, 4=good, 5=very good)
 def morning_rating_forData():
     morning_rating_d_Data = data_d[day_d]["Morning rating"]
     if morning_rating_d_Data == 1:
-        print("You woke up feeling miserable (1) this morning. Hopefully tonight brings better rest!")
+        return("You woke up feeling miserable (1) this morning. Hopefully tonight brings better rest!")
     elif morning_rating_d_Data == 2:
-        print("You woke up feeling bad (2) this morning. Your sleep could use some improvement.")
+        return("You woke up feeling bad (2) this morning. Your sleep could use some improvement.")
     elif morning_rating_d_Data == 3:
-        print("You woke up feeling okay (3) this morning. Not bad, but there's room for improvement")
+        return("You woke up feeling okay (3) this morning. Not bad, but there's room for improvement")
     elif morning_rating_d_Data == 4:
-        print("You woke up feeling good (4) this morning. Nice, your sleep did its job!")
+        return("You woke up feeling good (4) this morning. Nice, your sleep did its job!")
     elif morning_rating_d_Data == 5:
-        print("You woke up feeling very good (5) this morning. Fantastic, keep up this routine!")
+        return("You woke up feeling very good (5) this morning. Fantastic, keep up this routine!")
     else:
-        print("Please check Input!")
+        return("Please check Input!")
+
+#-----------------------------RECOMMENDATION-------------------------------------------------------------------
+
+def caffeine_alcohol_Y_N_forRecomendation():
+    caffeine_alcohol = data_d[day_d]["Caffeine_Alcohol consume"] #mit Noel anschauen bez. Input von Data (TRUE/FALSE)
+    if caffeine_alcohol == "yes":
+        return("Tip: Try not to consume caffeine or alcohol after 2pm... it improves your sleep!")
+    elif caffeine_alcohol == "no":
+        return("Great! You did not consume any caffeine or alcohol after 2pm... your body thanks you!")
+    else:
+        return("Please check Input!")
 
 def weekly_consitency():
+    wake_up_times_allDays = []
+    for entry in data_d.values():
+        if entry ["Wake-up time"] is not None:
+            wake_up_times_allDays.append(time_to_minutes_d(entry["Wake-up time"]))
+    if len(wake_up_times_allDays)>=4:
+        average_wake_up = round(sum(wake_up_times_allDays) / len(wake_up_times_allDays))
+        average_wake_up_hour = average_wake_up // 60 
+        average_wake_up_minute = average_wake_up % 60
+
+        ideal_bedtime = average_wake_up - 8 * 60
+        if ideal_bedtime < 0:
+            ideal_bedtime += 24 * 60
+        ideal_bedtime_hour = ideal_bedtime // 60
+        ideal_bedtime_minute = ideal_bedtime % 60
+
+        return(f"Your average wake up time is {average_wake_up_hour:02d}:{average_wake_up_minute:02d}. "
+               f"Try to go to sleep by {ideal_bedtime_hour:02d}:{ideal_bedtime_minute:02d}. So that you sleep 8h!")
+    else:
+        return(f"Weekly Average: Not enough Data yet! You have {len(wake_up_times_allDays)} of 4 nights logged.")
+
+def time_to_minutes_d(Time):
+    hours_string, minutes_string = Time.split(":")
+    hours_int = int(hours_string)*60
+    minutes_int = int(minutes_string)
+    return hours_int + minutes_int
+
+def training_readiness():
+    score = sleep_score()
+    if score is None:
+        return None
+    if score >= 75:
+        return("Today you are ready for a hard workout. Your body is well rested, so make it count!")
+    elif score >= 50:
+        return("Today an easy workout is the right choice. Keep it light and listen to your body.")
+    else: 
+        return("Today is a good day to rest. Recover well, and your next workout will be stronger!")
+
+#-----------------------------------SLEEP SCORE----------------------------------------------------------------
+
+def duration_points():
+    bedtime_d = data_d[day_d]["Bedtime"]
     wake_up_time_d = data_d[day_d]["Wake-up time"]
+    hours_bedtime_d, minutes_bedtime_d = bedtime_d.split(":")
+    hours_wakeup_d, minutes_wakeup_d = wake_up_time_d.split(":")
+    bedtime_in_minutes = int(hours_bedtime_d) * 60 + int(minutes_bedtime_d) + int(data_d[day_d]["Time to fall asleep"])
+    wakeuptime_in_minutes = int(hours_wakeup_d) * 60 + int(minutes_wakeup_d)
+    sleepduration_in_minutes = wakeuptime_in_minutes - bedtime_in_minutes
+    if sleepduration_in_minutes < 0:
+        sleepduration_in_minutes += 24*60
+    missing = max(0, 480 - sleepduration_in_minutes)
+    steps = missing // 30
+    points_deducted = steps * 5
+    points_duration = max(0, 50 - points_deducted)
+    return(points_duration)
+
+def morning_rating_points():
+    rating = data_d[day_d]["Morning rating"]
+    if rating is None:
+        return None
+    result = rating * 5
+    return(result)
+
+def caffeine_alcohol_points():
+    caffeine_alcohol = data_d[day_d]["Caffeine_Alcohol consume"]
+    if  caffeine_alcohol == "no":
+        points = 25
+    elif caffeine_alcohol == "yes":
+        points = 0
+    else:
+        return None
+    return(points)
 
 def sleep_score():
-    print()
+    duration = duration_points()
+    rating = morning_rating_points()
+    habits = caffeine_alcohol_points()
+    if rating is None or habits is None:
+        return None
+    return duration + rating + habits
+
+#------------------------------------------FRONT MENU---------------------------------------------------------  
 
 def daily():
+    if data_d[day_d]["Wake-up time"] is None:
+        print("No data yet. Log a night first.")
+        exit_to_main_menu()
+        return
     print(f"---Daily sleep review for {day_d} night---------------------------------------------------")
     print("")
-    print("Sleep summary:")
+    print("---Sleep summary:---")
+    print("")
     print(f"You went to bed by: {data_d[day_d]["Bedtime"]}")
     print(f"You woke up at: {data_d[day_d]["Wake-up time"]}")
     print(f"It took you {data_d[day_d]["Time to fall asleep"]} minutes to fall asleep")
-    print(f"That puts your total sleep duration to: {sleep_time}")
-    print(f"{caffeine_alcohol_Y_N_forData}")
-    print(f"{morning_rating_forData}")
-    print(f"---Sleep Score for {day_d} night-----------------------------------------------------------")
+    print(f"That puts your total sleep duration to: {sleep_time()}")
+    print(f"{caffeine_alcohol_Y_N_forData()}")
+    print(f"{morning_rating_forData()}")
+    print("")
+    print(f"---Sleep score for {day_d} night:---")
+    print("")
+    print(f"Your sleep score is {sleep_score()}/100")
+    print(f"Sleep duration form 8h: {duration_points()}/50")
+    print(f"Morning rating: {morning_rating_points()}/25")
+    print(f"Caffeine and alcohol consumption: {caffeine_alcohol_points()}/25")
+    print("")
+    print(f"---Recommendation:---")
+    print("")
+    print(f"{training_readiness()}")
+    print(f"{weekly_consitency()}")
+    print(f"{caffeine_alcohol_Y_N_forRecomendation()}")
+    exit_to_main_menu()
 
+def exit_to_main_menu():
+    while True:
+        print()
+        print("---------------------------------------------------------------------------------------")
+        print("")
+        print("1. Exit to main menu")
+        choice = input("choose an option: ")
+        if choice == "1":
+            break
+        else:
+            print("-------------------------------")
+            print("")
+            print("        !WRONG INPUT!")
+            print("")
+            print("-------------------------------")
 
 #--------------------------------------------TEST ZONE-------------------------------------------------------------
 
@@ -103,10 +224,10 @@ wakeuptime_in_minutes = int(hours_wakeup_d) * 60 + int(minutes_wakeup_d)
 sleepduration_in_minutes = wakeuptime_in_minutes - bedtime_in_minutes
 if sleepduration_in_minutes < 0:
     sleepduration_in_minutes += 24*60
-if sleepduration_in_minutes == 0:
-    print("Please check Input!")
-else:
-    print(f"{sleepduration_in_minutes // 60}h {sleepduration_in_minutes % 60}min")
+#if sleepduration_in_minutes == 0:
+#    print("Please check Input!")
+#else:
+#    print(f"{sleepduration_in_minutes // 60}h {sleepduration_in_minutes % 60}min")
 
 
 daily()
