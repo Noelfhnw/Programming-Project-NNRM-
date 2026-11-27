@@ -27,9 +27,15 @@ def time_to_minutes(time):
 def get_sleep_times(data, day):
     bedtime = time_to_minutes(data[day]["Bedtime"])
     wake_up = time_to_minutes(data[day]["Wake-up time"])
-    fall_asleep = time_to_minutes(data[day]["Time to fall asleep"])
+    # Fall asleep duration is already stored in minutes
+    fall_asleep = data[day]["Minutes to fall asleep"]
 
     return bedtime, wake_up, fall_asleep
+
+# # Test
+# data = add_Sleep_data.load_data()
+
+# print(get_sleep_times(data, "Monday"))
 
 # Calculate sleep duration in minutes for a selected day
 def calculate_sleep_duration(data, day):
