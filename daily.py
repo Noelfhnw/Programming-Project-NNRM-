@@ -16,16 +16,9 @@ import os
 
 #print(daily_weekday)
 #-------------------------------------------ÄNDER VOR GEBRAUCH AKTUELL TEST DICT---------------------------------------------------------------------------
-#data_d = add_Sleep_data.create_data()
-data_d = {
-    "Monday":    {"Bedtime": "23:00", "Wake-up time": "07:00", "Time to fall asleep": 10, "Morning rating": 3, "Caffeine_Alcohol consume": "yes"},
-    "Tuesday":   {"Bedtime": "23:30", "Wake-up time": "07:30", "Time to fall asleep": 20, "Morning rating": 4, "Caffeine_Alcohol consume": "no"},
-    "Wednesday": {"Bedtime": "23:30", "Wake-up time": "07:00", "Time to fall asleep": 15, "Morning rating": 4, "Caffeine_Alcohol consume": "no"},
-    "Thursday":  {"Bedtime": "03:00", "Wake-up time": "06:30", "Time to fall asleep": 0,  "Morning rating": 1, "Caffeine_Alcohol consume": "yes"},
-    "Friday":    {"Bedtime": "22:45", "Wake-up time": "06:45", "Time to fall asleep": 0,  "Morning rating": 2, "Caffeine_Alcohol consume": "yes"},
-    "Saturday":  {"Bedtime": "00:30", "Wake-up time": "07:15", "Time to fall asleep": 30, "Morning rating": 3, "Caffeine_Alcohol consume": "no"},
-    "Sunday":    {"Bedtime": "23:15", "Wake-up time": "07:00", "Time to fall asleep": 5,  "Morning rating": 5, "Caffeine_Alcohol consume": "no"},
-}
+
+data_d = add_Sleep_data.create_data()
+#data_d = 
 
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------
     #print(day_d)   = Todaysweekday -1
