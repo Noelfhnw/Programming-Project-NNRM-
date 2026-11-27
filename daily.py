@@ -205,8 +205,25 @@ def daily_text():
 #------------------------------------------FRONT MENU---------------------------------------------------------  
 
 def daily():
-    if data_d[day_d]["Wake-up time"] is None:
-        print("No data yet. Log a night first.")
+    global data_d
+    global day_d
+
+    data_d = add_Sleep_data.load_data()
+
+    now = datetime.now()
+    daily_weekday = now.isoweekday() - 2
+    day_d = days[daily_weekday]
+
+    missing_fields = []
+    for field, value in data_d[day_d].items():
+        if value is None:
+            missing_fields.append(field)
+
+    if len(missing_fields) > 0:
+        print(f"Data for {day_d} night is incomplete!")
+        print("Missing:")
+        for field in missing_fields:
+            print(f" - {field}")
         exit_to_main_menu()
         return
     print(f"---Daily sleep review for {day_d} night---------------------------------------------------")
@@ -223,7 +240,7 @@ def daily():
     print(f"---Sleep score for {day_d} night:---")
     print("")
     print(f"Your sleep score is {sleep_score()}/100")
-    print(f"Sleep duration form 8h: {duration_points()}/50")
+    print(f"Sleep duration from 8h: {duration_points()}/50")
     print(f"Morning rating: {morning_rating_points()}/25")
     print(f"Caffeine and alcohol consumption: {caffeine_alcohol_points()}/25")
     print("")
