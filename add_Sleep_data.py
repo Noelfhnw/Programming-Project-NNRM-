@@ -263,7 +263,7 @@ def input_valid_caffeine_alcohol_data(caffeine_alcohol_data):
         return False
     return True
 
-data = load_data()
-menu_sleep_data(data)
+#data = load_data()
+#menu_sleep_data(data)
 
 
