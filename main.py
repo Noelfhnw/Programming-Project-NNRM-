@@ -1,3 +1,4 @@
+import add_Sleep_data
 import daily
 
 def show_menu():
@@ -15,7 +16,8 @@ def show_menu():
 
 
 def add_sleep_data_Main():
-    print("TO DO add_slee_data")
+    data = add_Sleep_data.load_data()
+    add_Sleep_data.menu_sleep_data(data)
 
 def daily_Main():
     daily.daily()

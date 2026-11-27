@@ -18,14 +18,14 @@ def load_data():
         return data
 
 days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-fields = ["Bedtime", "Wake-up time", "Time to fall asleep", "Morning rating", "Caffeine_Alcohol consume"]
+fields = ["Bedtime", "Wake-up time", "Minutes to fall asleep", "Morning rating", "Caffeine_Alcohol consume"]
 
 
 def create_data():
     data = {}
     
     for day in days:
-        data [day] = {"Bedtime":None,"Wake-up time":None,"Time to fall asleep":None, "Morning rating":None, "Caffeine_Alcohol consume":None}
+        data [day] = {"Bedtime":None,"Wake-up time":None,"Minutes to fall asleep":None, "Morning rating":None, "Caffeine_Alcohol consume":None}
     return data
 
 
@@ -116,7 +116,7 @@ Which value do you want to enter or change for {day}?
     
 1. Bedtime
 2. Wake-up time
-3. Time to fall asleep
+3. Minutes to fall asleep
 4. Morning rating
 5. Caffeine_Alcohol consume
 6. Go Back to overview
@@ -167,7 +167,7 @@ Which value do you want to enter or change for {day}?
             data[day]["Wake-up time"]= wake_up_data
             save_data(data)
 
-        elif field == "Time to fall asleep":
+        elif field == "Minutes to fall asleep":
             fall_asleep_data = input(f"How long did it take you to fall asleep on {day} (HH:MM): ")
             if len(fall_asleep_data) == 4:
                 fall_asleep_data = "0" + fall_asleep_data
@@ -176,7 +176,7 @@ Which value do you want to enter or change for {day}?
                 fall_asleep_data = input(f"How long did it take you to fall asleep on {day} (HH:MM): ")
                 if len(fall_asleep_data) == 4:
                     fall_asleep_data = "0" + fall_asleep_data
-            data[day]["Time to fall asleep"]= fall_asleep_data
+            data[day]["Minutes to fall asleep"]= transform_input_time_to_fall_asleep_in_min(fall_asleep_data)
             save_data(data)
 
         elif field == "Morning rating":
@@ -246,6 +246,17 @@ def time_input_valid_fall_asleep_data(fall_asleep_data):
     if minutes >= 60 or minutes < 0:
         return False
     return True
+
+def transform_input_time_to_fall_asleep_in_min(fall_asleep_data):
+    hours_text = fall_asleep_data[0:2]
+    minutes_text = fall_asleep_data[3:5]
+    if not hours_text.isdigit() or not minutes_text.isdigit():
+        return False
+    hours = int(hours_text)
+    hours_in_minutes = hours* 60
+    minutes = int(minutes_text)
+    time_to_fall_asleep_minutes = hours_in_minutes + minutes
+    return time_to_fall_asleep_minutes  
 
 def input_valid_morning_rating(morning_rating_data):
     if len(morning_rating_data) != 1:
