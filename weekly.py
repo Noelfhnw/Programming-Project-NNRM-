@@ -161,13 +161,8 @@ def weekly_overview():
 
         # Write sleep data for each day
         for day in add_Sleep_data.days:
-
             file.write(f"{day}\n")
-
-            for field, value in data_w[day].items():
-                file.write(f"{field}: {value}\n")
-
-            file.write("\n--- Calculated results ---\n")
+            file.write("--- Calculated results ---\n")
 
             # Calculate and format sleep duration
             duration = calculate_sleep_duration(data_w, day)
