@@ -98,7 +98,7 @@ def format_sleep_duration(duration):
     minutes = duration % 60
 
     # Return formatted sleep duration
-    return f"{hours}h {minutes}min"
+    return f"{hours}h {minutes:02d}min"
 
 # Test
 # print(format_sleep_duration(360))
@@ -549,7 +549,7 @@ def calculate_weekly_score(entries):
     # Calculate total weekly score
     score = round(duration_points + quality_points + consistency_points)
 
-    return score
+    return score, duration_points, quality_points, consistency_points, consistent_nights
 
 # # Test
 # data = add_Sleep_data.load_data()
@@ -559,49 +559,19 @@ def calculate_weekly_score(entries):
 
 # print("Weekly sleep score:", score)
 
-# Generate weekly summary
-def weekly_summary(entries):
-
-    lines = []
-
-    lines.append("=== Weekly Summary ===")
-    lines.append(f"Recorded nights: {len(entries)}")
-
-    # Check the minimum number of recorded nights
-    if len(entries) < MIN_NIGHTS:
-        lines.append(f"At least {MIN_NIGHTS} complete nights are required.")
-        return "\n".join(lines)
-
-    # Calculate weekly statistics
-    total = calculate_total_sleep_duration(entries)
-    average_duration = calculate_average(entries, "sleep_minutes")
-    average_time_in_bed = calculate_average(entries, "time_in_bed")
-    average_efficiency = calculate_average(entries, "efficiency")
-
-    # Add calculated results
-    lines.append(f"Total sleep duration: {format_sleep_duration(total)}")
-    lines.append(f"Average sleep duration: {format_sleep_duration(round(average_duration))}")
-    lines.append(f"Average time in bed: {format_sleep_duration(round(average_time_in_bed))}")
-    lines.append(f"Average sleep efficiency: {average_efficiency:.2f}%")
-
-    return "\n".join(lines)
-
-# # Test
-# data = add_Sleep_data.load_data()
-# entries = prepare_weekly_entries(data)
-# print(weekly_summary(entries))
 
 # Generate weekly summary
 def weekly_summary(entries):
 
     lines = []
 
-    lines.append("=== Weekly Summary ===")
-    lines.append(f"Recorded nights: {len(entries)}")
+    lines.append("\n========== WEEKLY SLEEP REVIEW ==========\n")
+    lines.append(f"Complete nights: {len(entries)} of 7")
 
     # Check the minimum number of recorded nights
     if len(entries) < MIN_NIGHTS:
         lines.append(f"At least {MIN_NIGHTS} complete nights are required.")
+        lines.append(f"Add bedtime, wake-up time, and fall-asleep time for more days.")
         return "\n".join(lines)
 
     # Calculate weekly statistics
@@ -661,15 +631,26 @@ def weekly_summary(entries):
     lines.append("Try to maintain a consistent sleep schedule.")
 
     # Weekly sleep score
-    score = calculate_weekly_score(entries)
+    # BONUS (not an official user story): estimate a weekly score from 0-100.
+    # We use the familiar 50/30/20 weighting from the daily readiness score.
+    # 50 points = average sleep duration, capped at 8 hours.
+    # 30 points = average morning rating (1-5).
+    # 20 points = fraction of nights within 30min of average bedtime.
+    # This is only a simple project estimate, not a medical assessment.
+    score_result = calculate_weekly_score(entries)
 
     lines.append("\n--- Weekly Sleep Score ---")
 
-    if score is None:
-        lines.append("Not available: Missing morning ratings.")
+    if score_result is None:
+        lines.append("Weekly score unavailable: add a morning rating for every recorded night")
     else:
-        lines.append(f"Weekly sleep score: {score}/100")
-   
+        score, duration_points, quality_points, consistency_points, consistent_nights = score_result
+
+        lines.append(f"Weekly sleep score: {score}/100 (simple estimate)")
+        lines.append(f"Duration:    {duration_points:.1f}/50 points")
+        lines.append(f"Quality:     {quality_points:.1f}/30 points")
+        lines.append(f"Consistency: {consistency_points:.1f}/20 points")
+        lines.append(f"Consistent bedtimes: {consistent_nights} of {len(entries)} nights (within 30min)")
 
     return "\n".join(lines)
 
