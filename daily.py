@@ -33,7 +33,7 @@ def sleep_time():
     wake_up_time_d = data_d[day_d]["Wake-up time"]
     hours_bedtime_d, minutes_bedtime_d = bedtime_d.split(":")
     hours_wakeup_d, minutes_wakeup_d = wake_up_time_d.split(":")
-    bedtime_in_minutes = int(hours_bedtime_d) * 60 + int(minutes_bedtime_d) + int(data_d[day_d]["Time to fall asleep"])
+    bedtime_in_minutes = int(hours_bedtime_d) * 60 + int(minutes_bedtime_d) + int(data_d[day_d]["Minutes to fall asleep"])
     wakeuptime_in_minutes = int(hours_wakeup_d) * 60 + int(minutes_wakeup_d)
     sleepduration_in_minutes = wakeuptime_in_minutes - bedtime_in_minutes
     if sleepduration_in_minutes < 0:
@@ -124,7 +124,7 @@ def duration_points():
     wake_up_time_d = data_d[day_d]["Wake-up time"]
     hours_bedtime_d, minutes_bedtime_d = bedtime_d.split(":")
     hours_wakeup_d, minutes_wakeup_d = wake_up_time_d.split(":")
-    bedtime_in_minutes = int(hours_bedtime_d) * 60 + int(minutes_bedtime_d) + int(data_d[day_d]["Time to fall asleep"])
+    bedtime_in_minutes = int(hours_bedtime_d) * 60 + int(minutes_bedtime_d) + int(data_d[day_d]["Minutes to fall asleep"])
     wakeuptime_in_minutes = int(hours_wakeup_d) * 60 + int(minutes_wakeup_d)
     sleepduration_in_minutes = wakeuptime_in_minutes - bedtime_in_minutes
     if sleepduration_in_minutes < 0:
@@ -183,7 +183,7 @@ def daily_text():
     lines.append("")
     lines.append(f"You went to bed by: {data_d[day_d]['Bedtime']}")
     lines.append(f"You woke up at: {data_d[day_d]['Wake-up time']}")
-    lines.append(f"It took you {data_d[day_d]['Time to fall asleep']} minutes to fall asleep")
+    lines.append(f"It took you {data_d[day_d]['Minutes to fall asleep']} minutes to fall asleep")
     lines.append(f"That puts your total sleep duration to: {sleep_time()}")
     lines.append(caffeine_alcohol_Y_N_forData())
     lines.append(morning_rating_forData())
@@ -215,7 +215,7 @@ def daily():
     print("")
     print(f"You went to bed by: {data_d[day_d]["Bedtime"]}")
     print(f"You woke up at: {data_d[day_d]["Wake-up time"]}")
-    print(f"It took you {data_d[day_d]["Time to fall asleep"]} minutes to fall asleep")
+    print(f"It took you {data_d[day_d]["Minutes to fall asleep"]} minutes to fall asleep")
     print(f"That puts your total sleep duration to: {sleep_time()}")
     print(f"{caffeine_alcohol_Y_N_forData()}")
     print(f"{morning_rating_forData()}")
