@@ -670,17 +670,53 @@ def weekly_summary(entries):
         lines.append("Not available: Missing morning ratings.")
     else:
         lines.append(f"Weekly sleep score: {score}/100")
+   
 
     return "\n".join(lines)
 
 # Test
-data = add_Sleep_data.load_data()
-entries = prepare_weekly_entries(data)
+# data = add_Sleep_data.load_data()
+# entries = prepare_weekly_entries(data)
 
-print(weekly_summary(entries))
+# print(weekly_summary(entries))
 
+# Display weekly analysis and export options
+def weekly():
+
+    # Load saved sleep data
+    data = add_Sleep_data.load_data()
+
+    # Prepare weekly entries
+    entries = prepare_weekly_entries(data)
+
+    # Display weekly summary
+    print("\n----------------------------------------------\n")
+    print(weekly_summary(entries))
+
+    # Display available options
+    while True:
+
+        print("""
+----------------------------------------------
+
+What would you like to do?
+
+1. Export to text file
+2. Exit to main menu
+        """)
+
+        choice = input("Choose an option: ")
+
+        if choice == "1":
+            weekly_overview()
+
+        elif choice == "2":
+            break
+
+        else:
+            print("Invalid input! Choose 1 or 2.")
 
 
 # Test
 if __name__ == "__main__":
-    weekly_overview()
+    weekly()

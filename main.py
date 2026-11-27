@@ -1,5 +1,6 @@
 import add_Sleep_data
 import daily
+import weekly
 
 def show_menu():
     print("MENU")
@@ -23,7 +24,7 @@ def daily_Main():
     daily.daily()
 
 def weekly_Main():
-    print("TO DO weekly")
+    weekly.weekly()
         
 
 def main():
