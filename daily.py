@@ -270,3 +270,4 @@ if sleepduration_in_minutes < 0:
 #    print("Please check Input!")
 #else:
 #    print(f"{sleepduration_in_minutes // 60}h {sleepduration_in_minutes % 60}min")
+daily()
