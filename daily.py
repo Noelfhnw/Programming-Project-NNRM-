@@ -136,7 +136,7 @@ def duration_points():
     return(points_duration)
 
 def morning_rating_points():
-    rating = data_d[day_d]["Morning rating"]
+    rating = int(data_d[day_d]["Morning rating"])
     if rating is None:
         return None
     result = rating * 5
@@ -270,4 +270,3 @@ if sleepduration_in_minutes < 0:
 #    print("Please check Input!")
 #else:
 #    print(f"{sleepduration_in_minutes // 60}h {sleepduration_in_minutes % 60}min")
-daily()
