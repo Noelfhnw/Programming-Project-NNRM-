@@ -205,7 +205,11 @@ def weekly_overview():
         file.write(summary)
         file.write("\n")
 
-    print(f"Exported to {filename}")
+    print("\n----------------------------------------------\n")
+    print("Weekly report successfully exported!")
+    print("")
+    print(f"File saved to: {filename}")
+    print("\n----------------------------------------------\n")
 
 #     # Test
 # weekly_overview()
