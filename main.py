@@ -14,13 +14,13 @@ def show_menu():
     print("4. Exit")
 
 
-def add_sleep_data():
+def add_sleep_data_Main():
     print("TO DO add_slee_data")
 
-def daily():
-    print("TO DO daily")
+def daily_Main():
+    daily.daily()
 
-def weekly():
+def weekly_Main():
     print("TO DO weekly")
         
 
@@ -29,11 +29,11 @@ def main():
         show_menu()
         auswahl = input("choose an option: ")
         if auswahl == "1" :
-            add_sleep_data()
+            add_sleep_data_Main()
         elif auswahl == "2":
-            daily()
+            daily_Main()
         elif auswahl == "3":
-            weekly()
+            weekly_Main()
         elif auswahl == "4":
             break
         else:
