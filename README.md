@@ -1,14 +1,9 @@
 # Programming-Project-NNRM-
 Programming Foundations Group Project
-Topic: Health data tracker (sleep, calories...)
-
-Topic:
-
-Sleep & Lifestyle Tracker
-Enter sleep hours, calories, exercise, caffeine, mood, etc.
-The program can calculate averages and show whether there seems to be a relationship between things like sleep and calories/mood.
 
 # 😴 Sleep Tracker – Programming Project NNRM (Console)
+
+A simple console app in Python that helps you track your sleep. You enter your sleep data for each day of the week, and the program shows you a daily and a weekly analysis with a sleep score and recommendations.
 
 This project is intended to:
 
@@ -17,47 +12,235 @@ This project is intended to:
 - Demonstrate the use of **console interaction, data validation, and file processing**
 - Produce clean, well-structured, and documented code
 - Prepare students for **teamwork and documentation** in later modules
-- Use this repository as a starting point by importing it into your own GitHub account.  
-- Work only within your own copy — do not push to the original template.  
-- Commit regularly to track your progress.
-
-# 😴 TEMPLATE for documentation
 
 ## 📝 Analysis
 
 **Problem**
 
-People tend to sleep less than recommended and they dont know how to improve their sleep.
+People tend to sleep less than recommended and they don't know how to improve their sleep.
 
 **Scenario**
 
-People who aknowledge that they have to improve their sleep can use our programm to get insight to their sleep behavior and recieve a plan on how to fix their sleeping habits.
+People who acknowledge that they have to improve their sleep can use our program to get insight into their sleep behavior and receive recommendations on how to improve their sleeping habits.
 
 ### 👤 User Roles
 
 | Role | Description |
 |------|-------------|
-| **student** | wants to track their sleep and wants to know the wekkly/monthly average and how to improve their sleep.
+| **Student** | Wants to track their sleep, see a daily and weekly analysis and get tips on how to improve their sleep. |
 
+---
 
-### 📖 User Stories
+## 📖 User Stories
 
-# 😴 Sleep Tracker: User Stories
+### User Story Assignment
 
-A simple terminal program in Python (Programming Foundations, BSc Business Information Technology, FHNW). The user enters data in the console and the program saves it to a CSV file.
+| Member | User Stories | File |
+|--------|--------------|------|
+| Noel   | US-01, US-02, US-03 | `add_Sleep_data.py` |
+| Nils   | US-04, US-05, US-06 | `daily.py` |
+| Ronald | US-07, US-08, US-09 | `weekly.py` |
+| Maryna | US-10, US-11, US-12 | `weekly.py` |
 
-## User Story Assignment
+All members worked together on `main.py` (main menu) and added their functions there.
 
-| Member | User Stories | Status |
-|--------|--------------|--------|
-| Noel   | US-4,5,6 | 1. ⬜ <br>2. ⬜ <br>3. ⬜ |
-| Nils   | US-7,8,9 | 1. ⬜ <br>2. ⬜ <br>3. ⬜ |
-| Maryna | US-1,3,12 | 1. 🟨  <br>2. 🟨 <br>3. 🟨  |
-| Ronald | US-2,10,11 | 1. ⬜ <br>2. ⬜ <br>3. ⬜ |
+### Add Sleep Data (Noel)
 
-**Status legend:** ⬜ To do · 🟨 In progress · ✅ Done
+#### US-01: Enter bedtime and wake-up time
+As a student, I want to enter my bedtime and wake-up time for a day of the week, so that the program knows how long I was in bed.
 
-## US-01: Track Time to Fall Asleep
+**Acceptance Criteria:**
+- The user chooses a day (1–7) and enters the times in the format `HH:MM`.
+- Given `7:30`, the program saves it as `07:30`.
+- Given an invalid input such as `25:00` or `abc`, `Invalid input! --> HH:MM format` is displayed and the question is asked again.
+
+#### US-02: Enter minutes to fall asleep, morning rating and caffeine/alcohol
+As a student, I want to enter how long it took me to fall asleep, how rested I feel and whether I consumed caffeine or alcohol after 2pm, so that my sleep can be analysed in more detail.
+
+**Acceptance Criteria:**
+- The minutes to fall asleep are entered as `HH:MM` and saved in minutes (e.g. `00:20` → `20`).
+- The morning rating must be a whole number from 1 to 5, otherwise an error message is displayed and the question is asked again.
+- Caffeine/alcohol only accepts `yes` or `no`.
+
+#### US-03: Save and view my sleep data
+As a student, I want my data to be saved and shown in an overview, so that I don't lose it and can change it later.
+
+**Acceptance Criteria:**
+- All data is saved in `sleep_data.json`. If the file does not exist, it is created automatically.
+- The overview shows all 7 days with their values (empty values are shown as `None`).
+- The user can change an existing value of any day.
+
+### Daily (Nils)
+
+#### US-04: See my daily sleep summary
+As a student, I want to see a summary of last night, so that I know how long I slept.
+
+**Acceptance Criteria:**
+- Sleep duration = wake-up time − bedtime − minutes to fall asleep (also works over midnight).
+- Given bedtime `23:00`, wake-up `07:00` and 15 minutes to fall asleep, `7h 45min` is displayed.
+- If data for last night is missing, the program shows which fields are missing and returns to the menu.
+
+#### US-05: Get a sleep score and a training recommendation
+As a student, I want a sleep score from 0 to 100 and a training recommendation, so that I know how well I recovered.
+
+**Acceptance Criteria:**
+- Score = sleep duration (max. 50, −5 points for every 30 min below 8h) + morning rating × 5 (max. 25) + no caffeine/alcohol (25 points).
+- Given 8h sleep, rating 4 and no caffeine/alcohol, the score is 50 + 20 + 25 = **95**.
+- Score 75–100 → hard workout, 50–74 → easy workout, below 50 → rest day.
+
+#### US-06: Get tips and export my daily review
+As a student, I want sleep tips and to export my daily review to a text file, so that I can keep it.
+
+**Acceptance Criteria:**
+- With at least 4 logged nights, the ideal bedtime is shown (average wake-up time − 8h).
+- If caffeine/alcohol = `yes`, a tip to avoid it after 2pm is displayed.
+- Option `1. Export to text file` saves the review as `exports/daily_001.txt`, `daily_002.txt`, ... (existing files are never overwritten).
+
+### Weekly (Ronald)
+
+#### US-07: See my weekly average sleep duration
+As a student, I want to see my average sleep duration of the week, so that I can see if I sleep enough.
+
+**Acceptance Criteria:**
+- The average is calculated from all logged nights of the week.
+- Given nights of 7h, 8h and 6h, `7h 00min` is displayed.
+
+#### US-08: See my average bedtime and wake-up time
+As a student, I want to see my average bedtime and wake-up time, so that I can see how regular my sleep rhythm is.
+
+**Acceptance Criteria:**
+- The averages are shown in the format `HH:MM`.
+- Bedtimes around midnight are calculated correctly.
+
+#### US-09: Get a message if there is not enough data
+As a student, I want to be informed if I have not logged enough nights, so that the weekly analysis makes sense.
+
+**Acceptance Criteria:**
+- The weekly analysis is only shown with at least 4 logged nights.
+- Otherwise the program shows how many nights are logged (e.g. `2 of 4 nights logged`).
+
+### Weekly (Maryna)
+
+#### US-10: See my average morning rating
+As a student, I want to see my average morning rating of the week, so that I know how rested I usually feel.
+
+**Acceptance Criteria:**
+- The average of all logged ratings (1–5) is displayed, rounded to one decimal.
+- Given ratings 3, 4 and 5, `4.0` is displayed.
+
+#### US-11: See my best and worst night
+As a student, I want to see my longest and shortest night of the week, so that I can spot outliers.
+
+**Acceptance Criteria:**
+- The longest and shortest night are shown with the day and the duration.
+- Given only one logged night, it is shown as both longest and shortest.
+
+#### US-12: See how often I consumed caffeine or alcohol
+As a student, I want to see on how many days I consumed caffeine or alcohol after 2pm, so that I can see how it affects my sleep.
+
+**Acceptance Criteria:**
+- The program counts the days with `yes`, e.g. `3 of 7 days`.
+- If there was at least one `yes`, a tip is displayed.
+
+---
+
+## 📝 User Inputs
+
+All inputs are entered in **Add sleep data** (`add_Sleep_data.py`). The user first chooses a day (1–7) and then the value to enter.
+
+| Input | Question | Allowed values | Invalid example | Error message |
+|---|---|---|---|---|
+| **Bedtime** | Type in the time you went to bed (HH:MM) | `00:00`–`23:59` (`7:30` is accepted as `07:30`) | `25:00`, `7pm` | Invalid input! --> HH:MM format |
+| **Wake-up time** | When did you wake up (HH:MM) | `00:00`–`23:59` | `25:00`, `abc` | Invalid input! --> HH:MM format |
+| **Minutes to fall asleep** | How long did it take you to fall asleep (HH:MM) | `HH:MM`, saved in minutes | `20`, `abc` | Invalid input! --> HH:MM format |
+| **Morning rating** | How good do you feel after getting up (1–5) | Whole number 1–5 | `0`, `6`, `abc` | Invalid input! --> enter a number between 1-5 |
+| **Caffeine/Alcohol** | Did you consume caffeine or alcohol after 2pm (yes/no) | `yes` / `no` | `maybe`, `123` | Invalid input! --> enter yes or no |
+
+**Morning rating scale:** 1 = miserable, 2 = bad, 3 = okay, 4 = good, 5 = very good
+
+---
+
+## ✅ Project Requirements
+
+Each app must meet the following three criteria in order to be accepted (see also the official project guidelines PDF on Moodle):
+
+1. Interactive app (console input)
+2. Data validation (input checking)
+3. File processing (read/write)
+
+### 1. Interactive App (Console Input)
+
+The application interacts with the user via the console. In the main menu the user can:
+- **Add sleep data:** enter or change the data for each day of the week
+- **Daily:** see the analysis of last night (sleep duration, sleep score, recommendations)
+- **Weekly:** see the analysis of the whole week
+- **Exit:** close the program
+
+### 2. Data Validation
+
+Every input is checked by its **own validation function** in `add_Sleep_data.py`, e.g. `time_input_valid_bedtime_data()`, `input_valid_morning_rating()` or `input_valid_caffeine_alcohol_data()`. If the input is invalid, an error message is displayed and the question is asked again. The menus also check if the chosen option exists, otherwise `!WRONG INPUT!` is displayed. This way the program does not crash on wrong input.
+
+### 3. File Processing
+
+- **`sleep_data.json`:** stores the sleep data of all 7 days. It is read when the program starts and saved after every input. If it does not exist, it is created automatically.
+- **`exports/daily_XXX.txt`:** the daily review can be exported to a numbered text file (`daily_001.txt`, `daily_002.txt`, ...).
+
+---
+
+## ⚙️ Implementation
+
+### Technology
+- Python 3.x
+- Environment: VS Code
+- No external libraries
+
+### 📂 Repository Structure
+```text
+Programming-Project-NNRM-/
+├── main.py             # main menu, starts the program
+├── add_Sleep_data.py   # enter, validate and save sleep data
+├── daily.py            # daily analysis, sleep score and export
+├── weekly.py           # weekly analysis
+├── sleep_data.json     # saved sleep data (created automatically)
+├── exports/            # exported daily reviews (created automatically)
+└── README.md           # project description
+```
+
+### How to Run
+1. Open the repository in **VS Code**
+2. Open the **Terminal**
+3. Run:
+	```bash
+	python main.py
+	```
+
+### Libraries Used
+
+- `json`: to save and load the sleep data in `sleep_data.json`
+- `os`: to check if a file exists and to create the `exports` folder
+- `datetime`: to find out which day was last night
+
+All libraries are part of the Python standard library, so no installation is required.
+
+---
+
+## 👥 Team & Contributions
+
+| Name   | Contribution |
+|--------|--------------|
+| Noel   | `add_Sleep_data.py` – US-01, US-02, US-03 |
+| Nils   | `daily.py` – US-04, US-05, US-06 |
+| Ronald | `weekly.py` – US-07, US-08, US-09 |
+| Maryna | `weekly.py` – US-10, US-11, US-12 |
+| All    | `main.py` – main menu |
+
+---
+
+## 📖 User Stories (old)
+
+These were our first user stories. During the project we noticed that they depended too much on each other, so we rewrote them (see above).
+
+#### US-01 (old): Track Time to Fall Asleep
 **Assigned to:** 
 
 As a Worker I want to enter how many minutes it took me to fall asleep, so that I can track my sleep and understand how quickly I fall asleep.
@@ -72,7 +255,7 @@ As a Worker I want to enter how many minutes it took me to fall asleep, so that 
 - [🟨] Given no entries in the last 7 days, then ⚠️ No sleep data available for the last 7 days. is displayed.
 
 
-## US-02: Rate Morning Sleep Quality
+#### US-02 (old): Rate Morning Sleep Quality
 **Assigned to:** 
 
 As a Student I want to rate how rested I feel each morning on a scale from 1 to 5, so that I can track my sleep quality, not just my sleep duration.
@@ -91,7 +274,7 @@ As a Student I want to rate how rested I feel each morning on a scale from 1 to 
 - [ ] The student can view previously recorded ratings together with their dates.
 
 
-## US-03: Track Caffeine and Alcohol Consumption
+#### US-03 (old): Track Caffeine and Alcohol Consumption
 **Assigned to:** 
 
 As a Fitness Enthusiast, I want to record whether I consumed caffeine or alcohol during the day, so that I can understand how these habits may affect my sleep quality.
@@ -104,9 +287,8 @@ As a Fitness Enthusiast, I want to record whether I consumed caffeine or alcohol
 - [✅] After saving, ✅ Daily habits saved. is displayed.
 - [🟨] The user can view previously recorded caffeine and alcohol consumption together with their dates.
 
----
 
-## US-04: Log bedtime and wake-up time
+#### US-04 (old): Log bedtime and wake-up time
 **Assigned to:** 
 
 As a user, I want to log my bedtime and wake-up time, so that the program knows how long I slept.
@@ -118,7 +300,7 @@ As a user, I want to log my bedtime and wake-up time, so that the program knows 
 - [ ] After saving, `✅ Night saved.` is displayed. If `sleep_log.csv` does not exist, it is created automatically.
 - [ ] In none of the invalid cases does the program crash (no Python traceback).
 
-## US-05: See how long I slept last night
+#### US-05 (old): See how long I slept last night
 **Assigned to:** 
 
 As a user, I want to see how long I slept last night, so that I get immediate feedback.
@@ -130,7 +312,7 @@ As a user, I want to see how long I slept last night, so that I get immediate fe
 - [ ] The message includes the difference to the 8h 00min target, e.g., `30min below your target`.
 - [ ] Given `sleep_log.csv` has no entries, then `⚠️ No data yet. Log a night first.` is displayed.
 
-## US-06: See my weekly average sleep time
+#### US-06 (old): See my weekly average sleep time
 **Assigned to:** 
 
 As a user, I want to see my weekly average sleep time, so that I can spot trends.
@@ -143,7 +325,7 @@ As a user, I want to see my weekly average sleep time, so that I can spot trends
 - [ ] Given no entries, then `⚠️ No data yet. Log a night first.` is displayed.
 - [ ] The average is rounded to the full minute.
 
-## US-07: See my longest and shortest night
+#### US-07 (old): See my longest and shortest night
 **Assigned to:** 
 
 As a user, I want to see my longest and shortest night of the week or month, so that I can identify outliers.
@@ -155,7 +337,7 @@ As a user, I want to see my longest and shortest night of the week or month, so 
 - [ ] Given only one entry, then it is shown as both longest and shortest.
 - [ ] Given no entries, then `⚠️ No data yet. Log a night first.` is displayed.
 
-## US-08: Compare my last night to my average bedtime and wake-up time
+#### US-08 (old): Compare my last night to my average bedtime and wake-up time
 **Assigned to:** 
 
 As a user, I want to see my average bedtime and wake-up time and how my last night differs from them, so that I can see how regular my sleep rhythm is.
@@ -167,7 +349,7 @@ As a user, I want to see my average bedtime and wake-up time and how my last nig
 - [ ] Given the last night matches the average exactly, then `0min` difference is displayed.
 - [ ] Given fewer than 3 entries, then `⚠️ At least 3 nights are needed.` is displayed.
 
-## US-09: Get a personal sleep recommendation
+#### US-09 (old): Get a personal sleep recommendation
 **Assigned to:** 
 
 As a user, I want a sleep recommendation (target duration and ideal bedtime), so that I know what to aim for.
@@ -180,7 +362,7 @@ As a user, I want a sleep recommendation (target duration and ideal bedtime), so
 - [ ] Given a desired wake-up of `06:00`, then `Ideal bedtime: 22:00` is displayed.
 - [ ] Given a desired wake-up of `05:30`, then `Ideal bedtime: 21:30` is displayed.
 
-## US-10: Get a daily readiness score
+#### US-10 (old): Get a daily readiness score
 **Assigned to:** 
 
 As a user, I want a daily readiness score (0-100) based on my sleep length, quality, and consistency, so that I know how recovered I am.
@@ -197,7 +379,7 @@ As a user, I want a daily readiness score (0-100) based on my sleep length, qual
 - [ ] Given no quality rating for last night, then `⚠️ Rate your morning first (US-02).` is displayed and no score is shown.
 - [ ] The output reads `Readiness score: <score>/100` and states that it is only an estimate.
 
-## US-11: Get a training recommendation
+#### US-11 (old): Get a training recommendation
 **Assigned to:** 
 
 As an athlete, I want a training recommendation (hard / easy / rest day) based on my readiness score, so that I train effectively without overtraining.
@@ -215,7 +397,7 @@ As an athlete, I want a training recommendation (hard / easy / rest day) based o
 - [ ] Boundary values: 75 → hard, 74 → easy, 50 → easy, 49 → rest.
 - [ ] Given no entries, then `⚠️ No data yet. Log a night first.` is displayed.
 
-## US-12: Get sleep tips based on caffeine and alcohol
+#### US-12 (old): Get sleep tips based on caffeine and alcohol
 **Assigned to:** 
 
 As a user, I want to receive tips based on the caffeine and alcohol I logged, so that I can support better sleep.
@@ -227,226 +409,7 @@ As a user, I want to receive tips based on the caffeine and alcohol I logged, so
 - [✅] Given both are `No`, then `✅ No caffeine or alcohol logged. Keep it up!` is displayed.
 - [🟨] Given no entries, then `⚠️ No data yet. Log a night first.` is displayed.
 
-**Use cases:**
-- Show Menu (from `menu.txt`)
-- Create Order (choose pizzas)
-- Show Current Order and Total
-- Print Invoice (to `invoice_xxx.txt`)
-
 ---
-
-# 📝 User Inputs
- 
-This document lists all inputs the program asks the user for. The date is never asked; it is always today's date (or the date of the night being entered).
- 
-## 1. Daily Inputs (once per day)
- 
-| Input | Question | Allowed values | Invalid example | Error message |
-|---|---|---|---|---|
-| **Morning rating** | How rested do you feel this morning? | Whole number 1–5 | `0`, `6`, `2.5`, `abc` | ⚠️ Invalid rating. Enter a whole number from 1 to 5. |
-| **Caffeine** | Did you consume caffeine after 14:00? | `Yes` / `No` | `Maybe`, `123` | ⚠️ Invalid input. Please enter Yes or No. |
-| **Alcohol** | Did you consume alcohol after 14:00? | `Yes` / `No` | `Maybe`, `123` | ⚠️ Invalid input. Please enter Yes or No. |
- 
-**Morning rating scale:**
- 
-| Rating | Meaning |
-|---|---|
-| 1 | Very tired (bad) |
-| 2 | Tired |
-| 3 | Neutral |
-| 4 | Rested |
-| 5 | Very rested (good) |
- 
-## 2. Sleep Inputs (weekly data input)
- 
-The sleep data is entered for a time horizon of one week (7 nights). For each night, the program asks:
- 
-| Input | Question | Allowed values | Invalid example | Error message |
-|---|---|---|---|---|
-| **Bedtime** | When did you go to bed? | `HH:MM` (00:00–23:59) | `25:00`, `7pm` | ⚠️ Invalid time. Use HH:MM. |
-| **Wake-up time** | When did you wake up? | `HH:MM` (00:00–23:59) | `25:00`, `7pm` | ⚠️ Invalid time. Use HH:MM. |
-| **Time to fall asleep** | How long did it take you to fall asleep? | `short` / `medium` / `long` | `fast`, `20` | ⚠️ Invalid choice. Enter short, medium or long. |
- 
-**Time to fall asleep categories:**
- 
-| Category | Duration |
-|---|---|
-| short | less than 15 min |
-| medium | 15–30 min |
-| long | more than 30 min |
- 
-### Calculated sleep time
- 
-The actual sleep time is calculated from the inputs, not entered by the user:
- 
-```
-Sleep start   = Bedtime + time to fall asleep
-Sleep time    = Wake-up time − sleep start
-```
- 
-The sleep time is rounded to 15 minutes.
- 
-🚧 To decide: which number of minutes is used for each category in the calculation (e.g. short = 0 min, medium = 15 min, long = 30 min).
- 
-## 3. Other Inputs
- 
-| Input | Question | Allowed values | Error message |
-|---|---|---|---|
-| **Time period** (US-07) | Show week or month? | `week` / `month` | ⚠️ Invalid choice. |
-| **Desired wake-up time** (US-09) | When do you want to wake up? | `HH:MM` | ⚠️ Invalid time. Use HH:MM. |
-| **Main menu** | Choose an option | Number of a menu option | ⚠️ Invalid choice. |
- 
-## 4. Validation Summary
- 
-All inputs can be checked with four reusable functions (e.g. in `utils.py`):
- 
-| Function | Used for |
-|---|---|
-| Whole number in a range | Morning rating, main menu |
-| Yes / No | Caffeine, alcohol |
-| Time `HH:MM` | Bedtime, wake-up time, desired wake-up time |
-| Choice from a list | Time to fall asleep, week/month |
- 
-In none of the invalid cases does the program crash; it shows the error message and asks the question again.
-
-
-
-
-## ✅ Project Requirements
-
-Each app must meet the following three criteria in order to be accepted (see also the official project guidelines PDF on Moodle):
-
-1. Interactive app (console input)
-2. Data validation (input checking)
-3. File processing (read/write)
-
----
-
-### 1. Interactive App (Console Input)
-
-> 🚧 In this section, document how your project fulfills each criterion.  
----
-The application interacts with the user via the console. Users can:
-- View the pizza menu
-- Select pizzas and quantities
-- See the running total
-- Receive an invoice generated as a file
-
----
-
-
-### 2. Data Validation
-
-The application validates all user input to ensure data integrity and a smooth user experience. This is implemented in `main-invoice.py` as follows:
-
-- **Menu selection:** When the user enters a pizza number, the program checks if the input is a digit and within the valid menu range:
-	```python
-	if not choice.isdigit() or not (1 <= int(choice) <= len(menu)):
-			print("⚠️ Invalid choice.")
-			continue
-	```
-	This ensures only valid menu items can be ordered.
-
-- **Quantity input:** After a pizza is selected, the program asks for the quantity until a whole number of at least 1 is entered:
-	```python
-	if not quantity.isdigit() or int(quantity) < 1:
-			print("⚠️ Invalid quantity.")
-			continue
-	```
-	This rejects `0`, negative numbers, decimal numbers, and text.
-
-- **Menu file validation:** When reading the menu file, the program checks for valid price values and skips invalid lines:
-	```python
-	try:
-			menu.append({"name": name, "size": size, "price": float(price)})
-	except ValueError:
-			print(f"⚠️ Skipping invalid line: {line.strip()}")
-	```
-
-- **Main menu options:** The main menu checks for valid options and handles invalid choices gracefully:
-	```python
-	else:
-			print("⚠️ Invalid choice.")
-	```
-
-These checks prevent crashes and guide the user to provide correct input, matching the validation requirements described in the project guidelines.
-
----
-
----
-
-
-### 3. File Processing
-
-The application reads and writes data using files:
-
-- **Input file:** `menu.txt` — Contains the pizza menu, one item per line in the format `PizzaName;Size;Price`.
-	- Example:
-		```
-		Margherita;Medium;12.50
-		Salami;Large;15.00
-		Funghi;Small;9.00
-		```
-	- The application reads this file at startup to display available pizzas.
-
-- **Output file:** `invoice_001.txt` (and similar) — Generated when an order is completed. Contains a summary of the order, including items, quantities, prices, discounts, and totals.
-	- Example:
-		```
-		🍕 PIZZA RP INVOICE
-		---------------------
-		3x Diavola (Large) - CHF 52.50
-		---------------------
-		Discount: 10% discount (-CHF 5.25)
-		TOTAL: CHF 47.25
-		```
-		- The output file serves as a record for both the user and the pizzeria, ensuring accuracy and transparency.
-
-## ⚙️ Implementation
-
-### Technology
-- Python 3.x
-- Environment: GitHub Codespaces
-- No external libraries
-
-### 📂 Repository Structure
-```text
-PizzaRP/
-├── main.py             # main program logic (console application)
-├── menu.txt            # pizza menu (input data file)
-├── invoice_001.txt     # example of a generated invoice (output file)
-├── docs/               # optional screenshots or project documentation
-└── README.md           # project description and milestones
-```
-
-### How to Run
-> 🚧 Adjust if needed.
-1. Open the repository in **GitHub Codespaces**
-2. Open the **Terminal**
-3. Run:
-	```bash
-	python3 main.py
-	```
-
-### Libraries Used
-
-- `os`: Used for file and path operations, such as checking if the menu file exists and creating new files.
-- `glob`: Used to find all invoice files matching a pattern (e.g., `invoice_*.txt`) to determine the next invoice number.
-
-These libraries are part of the Python standard library, so no external installation is required. They were chosen for their simplicity and effectiveness in handling file management tasks in a console application.
-
-
-## 👥 Team & Contributions
-
-> 🚧 Fill in the names of all team members and describe their individual contributions below. Each student should be responsible for at least one part of the project.
-
-| Name       | Contribution                                 |
-|------------|----------------------------------------------|
-| Noel       | Task 4, 5 and 6								|
-| Nils       | Task 7, 8 and 9								|
-| Maryna     | Task 1, 3 and 12								|
-| Ronald     | Task 2, 10 and 11								|
-
-
 
 ## 🤝 Contributing
 
