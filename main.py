@@ -3,17 +3,20 @@ import daily
 import weekly
 
 def show_menu():
-    print("MENU")
-    print()
-    print("---Sleep Diary--------------------------------")
-    print("1. Add sleep data")
-    print()
-    print("---View sleep analysis and recommendations----")
-    print("2. Daily")
-    print("3. Weekly")
-    print()
-    print("----------------------------------------------")
-    print("4. Exit")
+    print("""
+MENU
+---Sleep tracker---
+1. Add sleep data
+
+
+---View sleep analysis and recommendations---
+2. Daily
+3. Weekly
+
+
+---Close application---
+4. Exit
+""")
 
 
 def add_sleep_data_Main():
